@@ -4,6 +4,8 @@
         "iterator": "cpp",
         "limits": "cpp",
         "iosfwd": "cpp",
-        "algorithm": "cpp"
+        "algorithm": "cpp",
+        "concepts": "cpp",
+        "iostream": "cpp"
     }
 }
