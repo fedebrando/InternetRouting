@@ -2,6 +2,8 @@
     "files.associations": {
         "random": "cpp",
         "iterator": "cpp",
-        "limits": "cpp"
+        "limits": "cpp",
+        "iosfwd": "cpp",
+        "algorithm": "cpp"
     }
 }

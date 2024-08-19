@@ -1,5 +1,12 @@
 #include "path.h"
 
+Path::Path() : path() {}
+
+Path::Path(edge e)
+{
+    path.push_back(e);
+}
+
 bool Path::in(const vector<node>& v, node n)
 {
     for (node nn : v)
@@ -36,10 +43,21 @@ Path Path::operator + (const Path& other) const
 {
     Path p;
 
-    if (path.back().second != other.path.front().first)
-        throw runtime_error("Cannot concat non contiguous paths!");
+    if (!(path.empty() || other.path.empty()))
+        if (path.back().second != other.path.front().first)
+            throw runtime_error("Cannot concat non contiguous paths!");
 
     p.path.insert(p.path.end(), path.begin(), path.end());
     p.path.insert(p.path.end(), other.path.begin(), other.path.end());
     return p;
+}
+
+bool Path::operator < (const Path& other) const
+{
+    return path < other.path;
+}
+
+bool Path::operator == (const Path& other) const
+{
+    return path == other.path;
 }

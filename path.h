@@ -17,11 +17,13 @@ class Path
         bool in(const vector<node>& v, node n);
 
     public:
-        Path() : path() {}
-
+        Path();
+        Path(edge e);
         bool loop_free();
         void insert(edge e);
         Path operator + (const Path& other) const;
+        bool operator < (const Path& other) const; //necessary for set
+        bool operator == (const Path& other) const;
         friend ostream& operator << (ostream& os, const Path& p)
         {
             for (edge e : p.path)
