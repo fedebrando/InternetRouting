@@ -4,13 +4,16 @@ OUT = main
  
 all: $(OUT)
  
-main: main.o path.o
+main: main.o path.o distance.o
 	$(CC) $(CFLAGS) -o $@ $^ 
  
-main.o: main.cpp
+main.o: main.cpp path.cpp distance.cpp
 	$(CC) $(CFLAGS) -c -o $@ $<
  
 path.o: path.cpp path.h
+	$(CC) $(CFLAGS) -c -o $@ $<
+
+distance.o: distance.cpp distance.h
 	$(CC) $(CFLAGS) -c -o $@ $<
  
 clean:

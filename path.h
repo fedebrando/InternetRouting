@@ -18,6 +18,7 @@ class Path
         bool in(const vector<node>& v, node n);
 
     public:
+        static const Path eps;
         Path();
         Path(edge e);
         bool loop_free();
@@ -26,7 +27,7 @@ class Path
         bool operator < (const Path& other) const; //necessary for set
         bool operator == (const Path& other) const;
         friend ostream& operator << (ostream& os, const Path& p);
-        ~Path() {}
+        ~Path() = default;
 };
 
 set<Path> operator ^ (const set<Path>& s1, const set<Path>& s2);

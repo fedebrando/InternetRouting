@@ -11,6 +11,7 @@ class Distance : public Weighable<Distance>
     public:
         static Distance zero();
         static Distance unity();
+        Distance();
         Distance(double d);
         Distance operator + (const Distance& other) const override;
         Distance operator * (const Distance& other) const override;

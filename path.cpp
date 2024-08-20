@@ -2,6 +2,8 @@
 #include <set>
 #include "path.h"
 
+const Path Path::eps;
+
 Path::Path() : path() {}
 
 Path::Path(edge e)

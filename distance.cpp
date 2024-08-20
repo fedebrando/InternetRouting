@@ -3,15 +3,18 @@
 #include <iostream>
 #include "distance.h"
 
-static Distance zero()
+Distance Distance::zero()
 {
     return Distance(numeric_limits<double>::infinity());
 }
 
-static Distance unity()
+Distance Distance::unity()
 {
     return Distance(0);
 }
+
+Distance::Distance() : Distance(Distance::unity().d)
+{}
 
 Distance::Distance(double d)
 {
