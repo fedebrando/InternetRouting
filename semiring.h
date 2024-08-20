@@ -1,39 +1,31 @@
 
 #ifndef SEMIRING
 #define SEMIRING
+
+#include <concepts>
+
+using namespace std;
+
 template<typename T>
-class Semiring
+class Weighable
 {
-    private:
-        T (*plus)(T op1, T op2);
-        T (*times)(T op1, T op2);
-        T zero;
-        T unity;
     public:
-        Semiring(T (*plus)(T, T), T (*times)(T, T), T zero, T unity)
+        virtual T operator + (const T& other) const = 0;
+        virtual T operator * (const T& other) const = 0;
+        virtual bool operator < (const T& other) const = 0;
+        virtual bool operator == (const T& other) const = 0;
+        virtual bool operator <= (const T& other) const final 
         {
-            this->plus = plus;
-            this->times = times;
-            this->zero = zero;
-            this->unity = unity;
-        }
-        ~Semiring()
-        {}
-        friend T operator + (const T& op1, const T& op2) const
-        {
-            return plus(op1, op2);
-        }
-        friend T operator * (const T& op1, const T& op2) const
-        {
-            return times(op1, op2);
-        }
-        T getZero() const
-        {
-            return zero;
-        }
-        T getUnity() const
-        {
-            return unity;
+            return *this < other || *this == other;
         }
 };
+
+template<typename T>
+concept Semiring = requires(T a, T b)
+{
+    { T::zero() } -> convertible_to<T>;
+    { T::unity() } -> convertible_to<T>;
+    is_base_of_v<Weighable<T>, T>;
+};
+
 #endif

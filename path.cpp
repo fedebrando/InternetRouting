@@ -1,3 +1,4 @@
+
 #include "path.h"
 
 Path::Path() : path() {}
@@ -60,4 +61,11 @@ bool Path::operator < (const Path& other) const
 bool Path::operator == (const Path& other) const
 {
     return path == other.path;
+}
+
+ostream& operator << (ostream& os, const Path& p)
+{
+    for (edge e : p.path)
+        os << "(" << e.first << ", " << e.second << ")";
+    return os;
 }

@@ -1,3 +1,4 @@
+
 #ifndef PATH
 #define PATH
 
@@ -24,12 +25,7 @@ class Path
         Path operator + (const Path& other) const;
         bool operator < (const Path& other) const; //necessary for set
         bool operator == (const Path& other) const;
-        friend ostream& operator << (ostream& os, const Path& p)
-        {
-            for (edge e : p.path)
-                os << "(" << e.first << ", " << e.second << ")";
-            return os;
-        }
+        friend ostream& operator << (ostream& os, const Path& p);
         ~Path() {}
 };
 
