@@ -16,26 +16,6 @@ set<node> operator - (const set<node>& s1, const set<node>& s2)
     return difference;
 }
 
-set<Path> operator ^ (const set<Path>& s1, const set<Path>& s2)
-{
-    set<Path> res;
-    Path p;
-
-    for (const Path& p1 : s1)
-        for (const Path& p2 : s2)
-        {
-            p = p1 + p2;
-            if (p.loop_free())
-                res.insert(p);
-        }
-    return res;
-}
-
-void operator += (set<Path>& s1, const set<Path>& s2)
-{
-    s1.insert(s2.begin(), s2.end());
-}
-
 int main (void) 
 {
     set<node> v = {0,1,2,3,4,5};

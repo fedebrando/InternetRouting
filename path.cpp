@@ -1,4 +1,5 @@
 
+#include <set>
 #include "path.h"
 
 Path::Path() : path() {}
@@ -69,3 +70,24 @@ ostream& operator << (ostream& os, const Path& p)
         os << "(" << e.first << ", " << e.second << ")";
     return os;
 }
+
+set<Path> operator ^ (const set<Path>& s1, const set<Path>& s2)
+{
+    set<Path> res;
+    Path p;
+
+    for (const Path& p1 : s1)
+        for (const Path& p2 : s2)
+        {
+            p = p1 + p2;
+            if (p.loop_free())
+                res.insert(p);
+        }
+    return res;
+}
+
+void operator += (set<Path>& s1, const set<Path>& s2)
+{
+    s1.insert(s2.begin(), s2.end());
+}
+

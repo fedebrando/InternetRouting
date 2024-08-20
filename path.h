@@ -29,4 +29,7 @@ class Path
         ~Path() {}
 };
 
+set<Path> operator ^ (const set<Path>& s1, const set<Path>& s2);
+void operator += (set<Path>& s1, const set<Path>& s2);
+
 #endif
