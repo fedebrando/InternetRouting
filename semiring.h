@@ -12,7 +12,10 @@ class Weighable
     public:
         virtual T operator + (const T& other) const = 0;
         virtual T operator * (const T& other) const = 0;
-        virtual bool operator < (const T& other) const = 0;
+        virtual bool operator < (const T& other) const final
+        {
+            return *this == *this + other;
+        }
         virtual bool operator == (const T& other) const = 0;
         virtual bool operator <= (const T& other) const final 
         {

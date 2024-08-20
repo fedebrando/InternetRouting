@@ -14,7 +14,6 @@ class Distance : public Weighable<Distance>
         Distance(double d);
         Distance operator + (const Distance& other) const override;
         Distance operator * (const Distance& other) const override;
-        bool operator < (const Distance& other) const override;
         bool operator == (const Distance& other) const override;
         friend ostream& operator << (ostream& os, const Distance& dis);
         ~Distance() = default;

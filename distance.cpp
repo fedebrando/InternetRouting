@@ -28,11 +28,6 @@ Distance Distance::operator * (const Distance& other) const
     return Distance(d + other.d);
 }
 
-bool Distance::operator < (const Distance& other) const 
-{
-    return d == d + other.d;
-}
-
 bool Distance::operator == (const Distance& other) const 
 {
     return d == other.d;
