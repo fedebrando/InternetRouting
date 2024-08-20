@@ -7,10 +7,10 @@ using namespace std;
 template<typename T>
 concept Weighable = requires(T a, T b)
 {
-    { a + b } -> std::convertible_to<T>;
-    { a * b } -> std::convertible_to<T>;
-    { T::zero() } -> std::convertible_to<T>;
-    { T::unity() } -> std::convertible_to<T>;
+    { a + b } -> convertible_to<T>;
+    { a * b } -> convertible_to<T>;
+    { T::zero() } -> convertible_to<T>;
+    { T::unity() } -> convertible_to<T>;
 };
 
 class Distance
