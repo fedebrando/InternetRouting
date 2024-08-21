@@ -8,9 +8,6 @@ Riferimenti bibliografici:
 [2] Griffin T. J., Lecture Notes, Algebraic Path Problems with applications to Internet Routing, Computer Laboratory, University of Cambridge, 2013.
 
 // TODO
-1. spacchettare dijkstra + funzione min
-2. parallelizzare (test, poi togliere)
-3. generalizzare il "nodo"
-4. divisione progetto in cartelle (Makefile) + commenti
+4. commenti
 5. programma di routing (parsing file dati -> matrice adiacenza)
 6. altri semianelli (widest, reliability)

@@ -9,14 +9,17 @@ OUT = main
  
 all: $(OUT)
 
-main: main.o distance.o
+main: main.o distance.o utilities.o
 	$(CC) $(OMP) $(CFLAGS) -o $@ $^
  
-main.o: main.cpp $(METRICS)/distance.cpp $(ALGO)/path.hpp $(ALGO)/semiring.hpp $(ALGO)/routing.hpp
+main.o: main.cpp distance.o utilities.o $(ALGO)/path.hpp $(ALGO)/semiring.hpp $(ALGO)/routing.hpp
 	$(CC) $(OTHER) $(OMP) $(CFLAGS) -c -o $@ $<
 
 distance.o: $(METRICS)/distance.cpp $(METRICS)/distance.hpp
-	$(CC) $(OTHER) $(CFLAGS) -c -o $@ $<
+	$(CC) -I$(ALGO) $(CFLAGS) -c -o $@ $<
+
+utilities.o: $(ALGO)/utilities.cpp $(ALGO)/utilities.hpp
+	$(CC) $(CFLAGS) -c -o $@ $<
  
 clean:
 	rm -f *.o *~ $(OUT)

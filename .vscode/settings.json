@@ -7,6 +7,14 @@
         "algorithm": "cpp",
         "concepts": "cpp",
         "iostream": "cpp",
-        "set": "cpp"
+        "set": "cpp",
+        "array": "cpp",
+        "deque": "cpp",
+        "list": "cpp",
+        "string": "cpp",
+        "unordered_map": "cpp",
+        "vector": "cpp",
+        "string_view": "cpp",
+        "initializer_list": "cpp"
     }
 }

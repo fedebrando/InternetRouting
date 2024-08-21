@@ -4,23 +4,11 @@
 
 #include <vector>
 #include <set>
-#include <limits>
-#include <algorithm>
-#include <iterator>
 #include "path.hpp"
 #include "semiring.hpp"
-#include "distance.hpp"
+#include "utilities.hpp"
 #include <omp.h>
 #include <sstream>
-#include <concepts>
-
-set<node> operator - (const set<node>& s1, const set<node>& s2)
-{
-    set<node> difference;
-
-    set_difference(s1.begin(), s1.end(), s2.begin(), s2.end(), inserter(difference, difference.begin()));
-    return difference;
-}
 
 template<Semiring E, typename T>
 class Routing

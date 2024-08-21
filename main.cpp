@@ -1,5 +1,6 @@
 
 #include "routing.hpp"
+#include "distance.hpp"
 #include <string>
 
 using namespace std;
