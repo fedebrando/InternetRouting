@@ -1,7 +1,7 @@
 
 #include <limits>
 #include <iostream>
-#include "distance.h"
+#include "distance.hpp"
 
 Distance Distance::zero()
 {

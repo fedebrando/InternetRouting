@@ -1,5 +1,5 @@
 
-#include "semiring.h"
+#include "semiring.hpp"
 
 using namespace std;
 

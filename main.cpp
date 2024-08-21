@@ -4,9 +4,9 @@
 #include <limits>
 #include <algorithm>
 #include <iterator>
-#include "path.h"
-#include "semiring.h"
-#include "distance.h"
+#include "path.hpp"
+#include "semiring.hpp"
+#include "distance.hpp"
 #include <omp.h>
 #include <sstream>
 #include <concepts>
