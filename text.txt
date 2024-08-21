@@ -1,7 +1,7 @@
 Efficient parallel Internet routing algorithms
 Proporre e implementare un algoritmo parallelo per trovare i percorsi a distanza minima tra un insieme finito di nodi;
 se tra due nodi ci sono più percorsi a uguale distanza, scegliere il migliore in base a qualche altro criterio, tipo reliability o bandwidth.
-Dataset: https://www.topology-zoo.org/dataset.html (suggerimento: concentrarsi su uno specifico network provider, ad esempio Colt Telecom network, che ha 152 nodi).
+Dataset: http://www.topology-zoo.org/dataset.html (suggerimento: concentrarsi su uno specifico network provider, ad esempio Colt Telecom network, che ha 152 nodi).
 
 Riferimenti bibliografici:
 [1] Dynerowicz S., Griffin T. G., On the Forwarding Paths Produced by Internet Routing Algorithms. Seweryn Dynerowicz (University of Namur, Belgium), Timothy G. Griffin. ICNP 2013.
