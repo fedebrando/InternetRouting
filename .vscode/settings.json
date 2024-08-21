@@ -6,6 +6,7 @@
         "iosfwd": "cpp",
         "algorithm": "cpp",
         "concepts": "cpp",
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "set": "cpp"
     }
 }
