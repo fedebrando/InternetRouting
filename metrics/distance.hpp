@@ -1,3 +1,9 @@
+/*
+ * Shortest Path
+*/
+
+#ifndef DISTANCE
+#define DISTANCE
 
 #include "semiring.hpp"
 
@@ -19,3 +25,5 @@ class Distance : public Weighable<Distance>
         friend ostream& operator << (ostream& os, const Distance& dis);
         ~Distance() = default;
 };
+
+#endif
