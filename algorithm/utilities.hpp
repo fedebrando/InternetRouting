@@ -1,3 +1,6 @@
+/*
+ * Utilities used by Path and Routing
+*/
 
 #ifndef UTILITIES
 #define UTILITIES
