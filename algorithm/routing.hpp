@@ -27,10 +27,10 @@ class Routing
         node find_qk_min(node i, const set<node>& s)
         {
             node qk;
-            E qk_min = E::zero();
+            E qk_min = E::zero;
 
             for (node j : v - s)
-                if (d[i][j] < qk_min)
+                if (d[i][j] <= qk_min)
                 {
                     qk = j;
                     qk_min = d[i][j];
@@ -45,9 +45,9 @@ class Routing
 
             // initialization
             for (node q : v)
-                d[i][q] = E::zero();
+                d[i][q] = E::zero;
             s.clear();
-            d[i][i] = E::unity();
+            d[i][i] = E::unity;
             pi[i][i].insert(Path<node>::eps);
 
             // dijkstra algorithm
@@ -70,7 +70,7 @@ class Routing
 
     public:
         Routing(const vector<T>& v_info, const vector<vector<E>>& a) : 
-            d(v_info.size(), vector<E>(v_info.size(), E::zero())),
+            d(v_info.size(), vector<E>(v_info.size(), E::zero)),
             pi(v_info.size(), vector<set<Path<node>>>(v_info.size(), set<Path<node>>()))
         {
             this->v_info = v_info;

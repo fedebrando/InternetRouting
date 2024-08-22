@@ -5,6 +5,8 @@
 #ifndef DISTANCE
 #define DISTANCE
 
+#include <limits>
+#include <iostream>
 #include "semiring.hpp"
 
 using namespace std;
@@ -15,9 +17,10 @@ class Distance : public Weighable<Distance>
         double d;
 
     public:
-        static Distance zero();
-        static Distance unity();
+        static const Distance zero;
+        static const Distance unity;
         Distance();
+        Distance(const Distance& dis);
         Distance(double d);
         Distance operator + (const Distance& other) const override;
         Distance operator * (const Distance& other) const override;
