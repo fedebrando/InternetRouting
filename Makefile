@@ -12,13 +12,13 @@ all: $(OUT)
 main: main.o distance.o bandwidth.o utilities.o
 	$(CC) $(OMP) $(CFLAGS) -o $@ $^
  
-main.o: main.cpp distance.o bandwidth.o utilities.o $(ALGO)/path.hpp $(ALGO)/semiring.hpp $(ALGO)/routing.hpp
+main.o: main.cpp distance.o bandwidth.o utilities.o $(ALGO)/path.hpp $(ALGO)/routing.hpp $(ALGO)/semiring.hpp
 	$(CC) $(OTHER) $(OMP) $(CFLAGS) -c -o $@ $<
 
-distance.o: $(METRICS)/distance.cpp $(METRICS)/distance.hpp
+distance.o: $(METRICS)/distance.cpp $(METRICS)/distance.hpp $(ALGO)/semiring.hpp
 	$(CC) -I$(ALGO) $(CFLAGS) -c -o $@ $<
 
-bandwidth.o: $(METRICS)/bandwidth.cpp $(METRICS)/bandwidth.hpp
+bandwidth.o: $(METRICS)/bandwidth.cpp $(METRICS)/bandwidth.hpp $(ALGO)/semiring.hpp
 	$(CC) -I$(ALGO) $(CFLAGS) -c -o $@ $<
 
 utilities.o: $(ALGO)/utilities.cpp $(ALGO)/utilities.hpp

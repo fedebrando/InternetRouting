@@ -62,10 +62,11 @@ class LexProduct : public Weighable<LexProduct<E1, E2>>
 {
     private:
         pair<E1, E2> couple;
-    public:
-        static const LexProduct<E1, E2> zero; 
 
-        static const LexProduct<E1, E2> unity;
+    public:
+        static const LexProduct<E1, E2> zero;
+
+        static const LexProduct<E1, E2> unity; 
 
         LexProduct() : LexProduct(LexProduct::zero)
         {}
@@ -116,10 +117,10 @@ class LexProduct : public Weighable<LexProduct<E1, E2>>
 
 template <Semiring E1, Semiring E2>
 requires Print<E1> && Print<E2>
-const LexProduct<E1, E2> LexProduct<E1, E2>::zero = LexProduct<E1, E2>(E1::zero, E2::zero);
+const LexProduct<E1, E2> LexProduct<E1, E2>::zero(E1::zero, E2::zero);
 
 template <Semiring E1, Semiring E2>
 requires Print<E1> && Print<E2>
-const LexProduct<E1, E2> LexProduct<E1, E2>::unity = LexProduct<E1, E2>(E1::unity, E2::unity);
+const LexProduct<E1, E2> LexProduct<E1, E2>::unity(E1::unity, E2::unity);
 
 #endif

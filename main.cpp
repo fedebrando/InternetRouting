@@ -3,6 +3,7 @@
 #include "distance.hpp"
 #include "bandwidth.hpp"
 #include "semiring.hpp"
+#include "path.hpp"
 #include <string>
 
 #define METRIC LexProduct<Distance, Bandwidth>
@@ -12,7 +13,7 @@ using namespace std;
 int main (void) 
 {
     vector<string> v = {"0", "1", "2", "3", "4"};
-    vector<vector<METRIC>> a(v.size(), vector<METRIC>(v.size(), LexProduct<Distance, Bandwidth>(Distance::zero, Bandwidth::zero)));
+    vector<vector<METRIC>> a(v.size(), vector<METRIC>(v.size()));
     /*
     {
         {Distance::zero, Distance(1), Distance::zero, Distance::zero, Distance::zero},
@@ -46,22 +47,25 @@ int main (void)
     a[2][1] = METRIC(0.81);
     */
 
-   a[0][1] = METRIC(Distance(1), Bandwidth(10));
-   a[1][0] = METRIC(Distance(1), Bandwidth(10));
-   a[1][2] = METRIC(Distance(2), Bandwidth(90));
-   a[2][1] = METRIC(Distance(2), Bandwidth(90));
-   a[1][3] = METRIC(Distance(1), Bandwidth(5));
-   a[3][1] = METRIC(Distance(1), Bandwidth(5));
-   a[1][4] = METRIC(Distance(1), Bandwidth(100));
-   a[4][1] = METRIC(Distance(1), Bandwidth(100));
-   a[3][2] = METRIC(Distance(1), Bandwidth(100));
-   a[2][3] = METRIC(Distance(1), Bandwidth(100));
-   a[4][2] = METRIC(Distance(1), Bandwidth(100));
-   a[2][4] = METRIC(Distance(1), Bandwidth(100));
+    
+    a[0][1] = METRIC(Distance(1), Bandwidth(10));
+    a[1][0] = METRIC(Distance(1), Bandwidth(10));
+    a[1][2] = METRIC(Distance(2), Bandwidth(90));
+    a[2][1] = METRIC(Distance(2), Bandwidth(90));
+    a[1][3] = METRIC(Distance(1), Bandwidth(5));
+    a[3][1] = METRIC(Distance(1), Bandwidth(5));
+    a[1][4] = METRIC(Distance(1), Bandwidth(100));
+    a[4][1] = METRIC(Distance(1), Bandwidth(100));
+    a[3][2] = METRIC(Distance(1), Bandwidth(100));
+    a[2][3] = METRIC(Distance(1), Bandwidth(100));
+    a[4][2] = METRIC(Distance(1), Bandwidth(100));
+    a[2][4] = METRIC(Distance(1), Bandwidth(100));
    
-    cout << Distance::zero << endl;
-    cout << Bandwidth::zero << endl;
+    cout << "(" << Distance::zero << ")" << endl;
+    cout << "[" << Bandwidth::zero << "]" << endl;
     cout << LexProduct<Distance, Bandwidth>(Distance::zero, Bandwidth::zero) << endl;
+    cout << METRIC::zero << endl;
+    cout << LexProduct<Distance, Bandwidth>::unity << endl;
 
     Routing<METRIC, string> r(v, a);
     r.compute_seq();
