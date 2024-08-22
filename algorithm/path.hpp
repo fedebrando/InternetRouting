@@ -117,7 +117,7 @@ class Path
 };
 
 template <typename T>
-const Path<T> Path<T>::eps = Path<T>();
+const Path<T> Path<T>::eps;
 
 template <typename T>
 set<Path<T>> operator ^ (const set<Path<T>>& s1, const set<Path<T>>& s2)

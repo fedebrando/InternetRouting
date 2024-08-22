@@ -8,6 +8,8 @@ Riferimenti bibliografici:
 [2] Griffin T. J., Lecture Notes, Algebraic Path Problems with applications to Internet Routing, Computer Laboratory, University of Cambridge, 2013.
 
 // TODO
+-1. risolvere static in LexProduct
+0. sistemare la stampa di epsilon
 1. prodotto lessicografico
 2. altri semianelli (widest, reliability)
 (3.) programma di routing (parsing file dati -> matrice adiacenza)
