@@ -28,21 +28,6 @@ concept Print = requires(ostream& os, T a)
     { os << a } -> convertible_to<ostream&>;
 };
 
-template <typename T>
-requires Order<T> && Print<T>
-class Edge : public pair<T, T>
-{
-    public:
-        Edge() : pair<T, T>()
-        {}
-
-        Edge(const Edge& e) : pair<T, T>(e)
-        {}
-
-        Edge(T first, T second) : pair<T, T>(first, second)
-        {}
-};
-
 template <Print T>
 ostream& operator << (ostream& os, const set<T>& s)
 {

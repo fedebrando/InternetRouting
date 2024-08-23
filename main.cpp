@@ -2,11 +2,8 @@
 #include <iostream>
 #include <vector>
 #include "routing.hpp"
-#include "distance.hpp"
-#include "bandwidth.hpp"
-#include "reliability.hpp"
-#include "semiring.hpp"
-#include "path.hpp"
+#include "metrics.hpp"
+#include "lex_product.hpp"
 #include "utilities.hpp"
 
 #define METRIC LexProduct<Distance, Bandwidth>

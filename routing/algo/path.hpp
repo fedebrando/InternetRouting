@@ -4,10 +4,14 @@
 
 #include <vector>
 #include <iostream>
+#include "edge.hpp"
 #include "utilities.hpp"
 
 using namespace std;
 
+/*
+ * Class Path<T> HAS-A Edge<T> 
+*/
 template <typename T>
 class Path
 {
