@@ -113,8 +113,15 @@ class Path
 
         friend ostream& operator << (ostream& os, const Path& p)
         {
-            for (const Edge<T>& e : p.path)
-                os << "(" << e.first << ", " << e.second << ")";
+            if (p == eps)
+                os << "ε";
+            else
+            {
+                os << "(" << p.path[0].first;
+                for (const Edge<T>& e : p.path)
+                    os << ", " << e.second;
+                os << ")";
+            }
             return os;
         }
 

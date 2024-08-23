@@ -13,8 +13,6 @@ using namespace std;
 
 typedef unsigned int node;
 
-set<node> operator - (const set<node>& s1, const set<node>& s2);
-
 template<typename T>
 concept Order = requires(T a, T b)
 {
@@ -42,5 +40,17 @@ class Edge : public pair<T, T>
         Edge(T first, T second) : pair<T, T>(first, second)
         {}
 };
+
+template <Print T>
+ostream& operator << (ostream& os, const set<T>& s)
+{
+    os << "{";
+    for (const T& e : s)
+        os << e << ", ";
+    os << (s.empty() ? "" : "\b\b") << "}";
+    return os;
+}
+
+set<node> operator - (const set<node>& s1, const set<node>& s2);
 
 #endif

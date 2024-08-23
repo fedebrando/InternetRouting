@@ -6,14 +6,16 @@
 #include "semiring.hpp"
 #include "path.hpp"
 #include <string>
+#include <iostream>
+#include <vector>
 
-#define METRIC LexProduct<Distance, Reliability>
+#define METRIC LexProduct<Distance, Bandwidth>
 
 using namespace std;
 
 int main (void) 
 {
-    vector<string> v = {"0", "1", "2", "3", "4"};
+    vector<string> v = {"pippo", "1", "2", "3", "4"};
     vector<vector<METRIC>> a(v.size(), vector<METRIC>(v.size()));
     // distance del paper
     /*
@@ -37,6 +39,7 @@ int main (void)
     */
 
     // distance * reliability
+    /*
     a[0][1] = METRIC(Distance(1), Reliability(0.5));
     a[1][4] = METRIC(Distance(1), Reliability(0.1));
     a[1][3] = METRIC(Distance(1), Reliability(0.9));
@@ -49,9 +52,9 @@ int main (void)
     a[2][3] = METRIC(Distance(1), Reliability(0.9));
     a[2][4] = METRIC(Distance(1), Reliability(1));
     a[2][1] = METRIC(Distance(2), Reliability(0.81));
+    */
 
     // distance * bandwidth
-    /* 
     a[0][1] = METRIC(Distance(1), Bandwidth(10));
     a[1][0] = METRIC(Distance(1), Bandwidth(10));
     a[1][2] = METRIC(Distance(2), Bandwidth(90));
@@ -64,7 +67,6 @@ int main (void)
     a[2][3] = METRIC(Distance(1), Bandwidth(100));
     a[4][2] = METRIC(Distance(1), Bandwidth(100));
     a[2][4] = METRIC(Distance(1), Bandwidth(100));
-    */
    
     /*
     cout << "(" << Distance::zero() << ")" << endl;
@@ -90,12 +92,7 @@ int main (void)
     {
         for (set<Path<string>> sp : vsp)
         {
-            cout << "{";
-            for (const Path<string>& p : sp)
-            {
-                cout << p << " ";
-            }
-            cout << "\b} ";
+            cout << sp << " ";
         }
         cout << endl;
     }
