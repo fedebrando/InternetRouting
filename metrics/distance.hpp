@@ -22,6 +22,8 @@ class Distance : public Weighable<Distance>
         Distance();
         Distance(const Distance& dis);
         Distance(double d);
+        double getD() const;
+        void setD(double d);
         Distance operator + (const Distance& other) const override;
         Distance operator * (const Distance& other) const override;
         bool operator == (const Distance& other) const override;

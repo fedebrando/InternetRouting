@@ -15,37 +15,47 @@ Bandwidth Bandwidth::unity()
     return bw1;
 }
 
-
 Bandwidth::Bandwidth() : Bandwidth(Bandwidth::zero())
 {}
 
-Bandwidth::Bandwidth(const Bandwidth& bandw)
-{
-    this->bw = bandw.bw;
-}
+Bandwidth::Bandwidth(const Bandwidth& bandw) : Bandwidth(bandw.getBw())
+{}
 
 Bandwidth::Bandwidth(double bw)
 {
-    this->bw = bw;
+    setBw(bw);
+}
+
+double Bandwidth::getBw() const
+{
+    return bw;
+}
+
+void Bandwidth::setBw(double bw)
+{
+    if (bw >= 0)
+        this->bw = bw;
+    else
+        this->bw = zero().getBw();
 }
 
 Bandwidth Bandwidth::operator + (const Bandwidth& other) const 
 {
-    return Bandwidth(max(bw, other.bw));
+    return Bandwidth(max(getBw(), other.getBw()));
 }
 
 Bandwidth Bandwidth::operator * (const Bandwidth& other) const 
 {
-    return Bandwidth(min(bw, other.bw));
+    return Bandwidth(min(getBw(), other.getBw()));
 }
 
 bool Bandwidth::operator == (const Bandwidth& other) const 
 {
-    return bw == other.bw;
+    return getBw() == other.getBw();
 }
 
 ostream& operator << (ostream& os, const Bandwidth& bandw)
 {
-    os << bandw.bw;
+    os << bandw.getBw();
     return os;
 }

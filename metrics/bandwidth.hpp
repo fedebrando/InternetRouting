@@ -22,6 +22,8 @@ class Bandwidth : public Weighable<Bandwidth>
         Bandwidth();
         Bandwidth(const Bandwidth& bandw);
         Bandwidth(double bw);
+        double getBw() const;
+        void setBw(double bw);
         Bandwidth operator + (const Bandwidth& other) const override;
         Bandwidth operator * (const Bandwidth& other) const override;
         bool operator == (const Bandwidth& other) const override;

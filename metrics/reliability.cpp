@@ -18,33 +18,44 @@ Reliability Reliability::unity()
 Reliability::Reliability() : Reliability(Reliability::zero())
 {}
 
-Reliability::Reliability(const Reliability& rel)
-{
-    this->r = rel.r;
-}
+Reliability::Reliability(const Reliability& rel) : Reliability(rel.getR())
+{}
 
 Reliability::Reliability(double r)
 {
-    this->r = r;
+    setR(r);
+}
+
+double Reliability::getR() const
+{
+    return r;
+}
+
+void Reliability::setR(double r)
+{
+    if (0 <= r && r <= 1)
+        this->r = r;
+    else
+        this->r = zero().getR();
 }
 
 Reliability Reliability::operator + (const Reliability& other) const 
 {
-    return Reliability(max(r, other.r));
+    return Reliability(max(getR(), other.getR()));
 }
 
 Reliability Reliability::operator * (const Reliability& other) const 
 {
-    return Reliability(r * other.r);
+    return Reliability(getR() * other.getR());
 }
 
 bool Reliability::operator == (const Reliability& other) const 
 {
-    return r == other.r;
+    return getR() == other.getR();
 }
 
 ostream& operator << (ostream& os, const Reliability& rel)
 {
-    os << rel.r;
+    os << rel.getR();
     return os;
 }

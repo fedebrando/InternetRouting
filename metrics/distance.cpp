@@ -18,33 +18,44 @@ Distance Distance::unity()
 Distance::Distance() : Distance(Distance::zero())
 {}
 
-Distance::Distance(const Distance& dis)
-{
-    this->d = dis.d;
-}
+Distance::Distance(const Distance& dis) : Distance(dis.getD())
+{}
 
 Distance::Distance(double d)
 {
-    this->d = d;
+    setD(d);
+}
+
+double Distance::getD() const
+{
+    return d;
+}
+
+void Distance::setD(double d)
+{
+    if (d >= 0)
+        this->d = d;
+    else
+        this->d = zero().getD();
 }
 
 Distance Distance::operator + (const Distance& other) const 
 {
-    return Distance(min(d, other.d));
+    return Distance(min(getD(), other.getD()));
 }
 
 Distance Distance::operator * (const Distance& other) const 
 {
-    return Distance(d + other.d);
+    return Distance(getD() + other.getD());
 }
 
 bool Distance::operator == (const Distance& other) const 
 {
-    return d == other.d;
+    return getD() == other.getD();
 }
 
 ostream& operator << (ostream& os, const Distance& dis)
 {
-    os << dis.d;
+    os << dis.getD();
     return os;
 }

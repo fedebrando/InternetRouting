@@ -55,6 +55,10 @@ concept Semiring = requires()
     is_base_of_v<Weighable<E>, E>;
 };
 
+// The lexicographic product of two semirings is
+// distributive (and optimality is garanteed) if and only if 
+// the two components are distributive
+// and the first one * is cancellative or the second one * is constant
 template <Semiring E1, Semiring E2>
 requires Print<E1> && Print<E2>
 class LexProduct : public Weighable<LexProduct<E1, E2>>
@@ -80,14 +84,13 @@ class LexProduct : public Weighable<LexProduct<E1, E2>>
         LexProduct() : LexProduct(LexProduct::zero())
         {}
 
-        LexProduct(const LexProduct& lp)
-        {
-            couple = pair<E1, E2>(lp.couple);
-        }
+        LexProduct(const LexProduct& lp) : LexProduct(lp.getFirst(), lp.getSecond())
+        {}
 
-        LexProduct(E1 w1, E2 w2) 
+        LexProduct(E1 w1, E2 w2)
         {
-            couple = pair<E1, E2>(w1, w2);
+            setFirst(w1);
+            setSecond(w2);
         }
 
         E1 getFirst() const
@@ -98,6 +101,16 @@ class LexProduct : public Weighable<LexProduct<E1, E2>>
         E2 getSecond() const
         {
             return couple.second;
+        }
+
+        void setFirst(E1 fst) 
+        {
+            couple.first = fst;
+        }
+
+        void setSecond(E2 snd) 
+        {
+            couple.second = snd;
         }
 
         LexProduct operator + (const LexProduct& other) const
