@@ -57,7 +57,7 @@ int main (void)
     // distance * bandwidth
     a[0][1] = METRIC(Distance(1), Bandwidth(10));
     a[1][0] = METRIC(Distance(1), Bandwidth(10));
-    a[1][2] = METRIC(Distance(-2), Bandwidth(90));
+    a[1][2] = METRIC(Distance(2), Bandwidth(90));
     a[2][1] = METRIC(Distance(2), Bandwidth(90));
     a[1][3] = METRIC(Distance(1), Bandwidth(5));
     a[3][1] = METRIC(Distance(1), Bandwidth(5));
