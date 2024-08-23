@@ -36,6 +36,9 @@ class Edge : public pair<T, T>
         Edge() : pair<T, T>()
         {}
 
+        Edge(const Edge& e) : pair<T, T>(e)
+        {}
+
         Edge(T first, T second) : pair<T, T>(first, second)
         {}
 };

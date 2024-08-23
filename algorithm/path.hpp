@@ -29,6 +29,11 @@ class Path
         Path() : path()
         {}
 
+        Path(const Path& p)
+        {
+            path = vector<Edge<T>>(p.path);
+        }
+
         Path(Edge<T> e)
         {
             path.push_back(e);
@@ -111,6 +116,12 @@ class Path
             for (const Edge<T>& e : p.path)
                 os << "(" << e.first << ", " << e.second << ")";
             return os;
+        }
+
+        Path<T>& operator = (const Path<T>& p)
+        {
+            path = p.path;
+            return *this;
         }
 
         ~Path() = default;

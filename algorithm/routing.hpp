@@ -79,6 +79,10 @@ class Routing
                 v.insert(i);
         }
 
+        Routing(const Routing& r) = delete;
+
+        Routing& operator = (const Routing& r) = delete;
+
         void compute_seq()
         {
             for (node i : v)
