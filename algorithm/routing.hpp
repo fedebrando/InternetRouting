@@ -8,11 +8,11 @@
 
 #include <vector>
 #include <set>
+#include <omp.h>
+#include <sstream> // for parallel info printing
 #include "path.hpp"
 #include "semiring.hpp"
 #include "utilities.hpp"
-#include <omp.h>
-#include <sstream>
 
 template<Semiring E, typename T>
 class Routing
@@ -117,22 +117,18 @@ class Routing
             Path<T> el_path_info;
 
             for (node i = 0; i < pi.size(); i++)
-            {
                 for (node j = 0; j < pi.size(); j++)
                 {
                     for (const Path<node>& el_path : pi[i][j])
                     {
                         for (const Edge<node>& edge : el_path)
-                        {
                             el_path_info.insert(Edge(v_info[edge.first], v_info[edge.second]));
-                        }
                         pi_info_el.insert(el_path_info);
                         el_path_info.clear();
                     }
                     pi_info[i][j] = pi_info_el;
                     pi_info_el.clear();
                 }
-            }
             return pi_info;
         }
 

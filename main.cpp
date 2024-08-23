@@ -1,13 +1,13 @@
 
+#include <iostream>
+#include <vector>
 #include "routing.hpp"
 #include "distance.hpp"
 #include "bandwidth.hpp"
 #include "reliability.hpp"
 #include "semiring.hpp"
 #include "path.hpp"
-#include <string>
-#include <iostream>
-#include <vector>
+#include "utilities.hpp"
 
 #define METRIC LexProduct<Distance, Bandwidth>
 
@@ -67,6 +67,17 @@ int main (void)
     a[2][3] = METRIC(Distance(1), Bandwidth(100));
     a[4][2] = METRIC(Distance(1), Bandwidth(100));
     a[2][4] = METRIC(Distance(1), Bandwidth(100));
+
+    // bandwidth * distance
+    /*
+    a[0][1] = METRIC(Bandwidth(5), Distance(1));
+    a[2][1] = METRIC(Bandwidth(5), Distance(4));
+    a[3][0] = METRIC(Bandwidth(5), Distance(1));
+    a[4][0] = METRIC(Bandwidth(10), Distance(5));
+    a[4][2] = METRIC(Bandwidth(5), Distance(1));
+    a[2][3] = METRIC(Bandwidth(5), Distance(1));
+    a[3][4] = METRIC(Bandwidth(10), Distance(1));
+    */
    
     /*
     cout << "(" << Distance::zero() << ")" << endl;
@@ -77,25 +88,10 @@ int main (void)
     */
 
     Routing<METRIC, string> r(v, a);
-    r.compute_par();
-    
-    for (vector<METRIC> vd : r.getD())
-    {
-        for (METRIC w : vd)
-        {
-            cout << w << " ";
-        }
-        cout << endl;
-    }
 
-    for (vector<set<Path<string>>> vsp : r.getPi())
-    {
-        for (set<Path<string>> sp : vsp)
-        {
-            cout << sp << " ";
-        }
-        cout << endl;
-    }
+    r.compute_par();
+    cout << r.getD() << endl;
+    cout << r.getPi() << endl;
 
     return 0;
 }

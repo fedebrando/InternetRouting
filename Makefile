@@ -1,3 +1,4 @@
+
 CC = g++
 CFLAGS = -std=c++20
 OMP = -fopenmp

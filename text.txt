@@ -1,3 +1,4 @@
+
 Efficient parallel Internet routing algorithms
 Proporre e implementare un algoritmo parallelo per trovare i percorsi a distanza minima tra un insieme finito di nodi;
 se tra due nodi ci sono più percorsi a uguale distanza, scegliere il migliore in base a qualche altro criterio, tipo reliability o bandwidth.

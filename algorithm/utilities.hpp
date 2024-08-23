@@ -1,3 +1,4 @@
+
 /*
  * Utilities used by Path and Routing
 */
@@ -8,6 +9,7 @@
 #include <iostream>
 #include <set>
 #include <concepts>
+#include <vector>
 
 using namespace std;
 
@@ -48,6 +50,26 @@ ostream& operator << (ostream& os, const set<T>& s)
     for (const T& e : s)
         os << e << ", ";
     os << (s.empty() ? "" : "\b\b") << "}";
+    return os;
+}
+
+template <Print T>
+ostream& operator << (ostream& os, const vector<T>& v)
+{
+    for (const T& e : v)
+        os << e << " ";
+    if (!v.empty())
+        os << "\b";
+    return os;
+}
+
+template <Print T>
+ostream& operator << (ostream& os, const vector<vector<T>>& v)
+{
+    for (const vector<T>& e : v)
+        os << e << "\n";
+    if (!v.empty())
+        os << "\b";
     return os;
 }
 
