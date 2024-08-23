@@ -1,11 +1,22 @@
 
 #include "bandwidth.hpp"
 
-const Bandwidth Bandwidth::zero = Bandwidth(0);
+Bandwidth Bandwidth::zero()
+{
+    static Bandwidth bw0(0);
 
-const Bandwidth Bandwidth::unity = Bandwidth(numeric_limits<double>::infinity());
+    return bw0;
+}
 
-Bandwidth::Bandwidth() : Bandwidth(Bandwidth::zero)
+Bandwidth Bandwidth::unity()
+{
+    static Bandwidth bw1(numeric_limits<double>::infinity());
+
+    return bw1;
+}
+
+
+Bandwidth::Bandwidth() : Bandwidth(Bandwidth::zero())
 {}
 
 Bandwidth::Bandwidth(const Bandwidth& bandw)

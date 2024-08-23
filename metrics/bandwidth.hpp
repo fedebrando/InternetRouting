@@ -17,8 +17,8 @@ class Bandwidth : public Weighable<Bandwidth>
         double bw;
 
     public:
-        static const Bandwidth zero;
-        static const Bandwidth unity;
+        static Bandwidth zero();
+        static Bandwidth unity();
         Bandwidth();
         Bandwidth(const Bandwidth& bandw);
         Bandwidth(double bw);

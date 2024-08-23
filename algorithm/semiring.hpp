@@ -47,14 +47,13 @@ template<typename E>
 concept Semiring = requires()
 {
     // The identity for + (a + 0 = 0 + a = a), and the annihilator for * (a * 0 = 0 * a = 0)
-    { E::zero } -> convertible_to<const E&>;
+    { E::zero() } -> convertible_to<E>;
 
     // The identity for * (a * 1 = 1 * a = a)
-    { E::unity } -> convertible_to<const E&>;
+    { E::unity() } -> convertible_to<E>;
     
     is_base_of_v<Weighable<E>, E>;
 };
-
 
 template <Semiring E1, Semiring E2>
 requires Print<E1> && Print<E2>
@@ -64,11 +63,21 @@ class LexProduct : public Weighable<LexProduct<E1, E2>>
         pair<E1, E2> couple;
 
     public:
-        static const LexProduct<E1, E2> zero;
+        static LexProduct<E1, E2> zero()
+        {
+            static LexProduct<E1, E2> lp0(E1::zero(), E2::zero());
 
-        static const LexProduct<E1, E2> unity; 
+            return lp0;
+        }
 
-        LexProduct() : LexProduct(LexProduct::zero)
+        static LexProduct<E1, E2> unity()
+        {
+            static LexProduct<E1, E2> lp1(E1::unity(), E2::unity());
+
+            return lp1;
+        }
+
+        LexProduct() : LexProduct(LexProduct::zero())
         {}
 
         LexProduct(const LexProduct& lp)
@@ -114,13 +123,5 @@ class LexProduct : public Weighable<LexProduct<E1, E2>>
 
         ~LexProduct() = default;
 };
-
-template <Semiring E1, Semiring E2>
-requires Print<E1> && Print<E2>
-const LexProduct<E1, E2> LexProduct<E1, E2>::zero(E1::zero, E2::zero);
-
-template <Semiring E1, Semiring E2>
-requires Print<E1> && Print<E2>
-const LexProduct<E1, E2> LexProduct<E1, E2>::unity(E1::unity, E2::unity);
 
 #endif

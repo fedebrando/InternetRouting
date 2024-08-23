@@ -1,11 +1,21 @@
 
 #include "distance.hpp"
 
-const Distance Distance::zero = Distance(numeric_limits<double>::infinity());
+Distance Distance::zero()
+{
+    static Distance d0(numeric_limits<double>::infinity());
 
-const Distance Distance::unity = Distance(0);
+    return d0;
+}
 
-Distance::Distance() : Distance(Distance::zero)
+Distance Distance::unity()
+{
+    static Distance d1(0);
+
+    return d1;
+}
+
+Distance::Distance() : Distance(Distance::zero())
 {}
 
 Distance::Distance(const Distance& dis)

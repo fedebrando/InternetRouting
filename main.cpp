@@ -16,20 +16,20 @@ int main (void)
     vector<vector<METRIC>> a(v.size(), vector<METRIC>(v.size()));
     /*
     {
-        {Distance::zero, Distance(1), Distance::zero, Distance::zero, Distance::zero},
-        {Distance(1), Distance::zero, Distance(2), Distance(1), Distance(1)},
-        {Distance::zero, Distance(2), Distance::zero, Distance(1), Distance(1)},
-        {Distance::zero, Distance(1), Distance(1), Distance::zero, Distance::zero},
-        {Distance::zero, Distance(1), Distance(1), Distance::zero, Distance::zero}
+        {Distance::zero(), Distance(1), Distance::zero(), Distance::zero(), Distance::zero()},
+        {Distance(1), Distance::zero(), Distance(2), Distance(1), Distance(1)},
+        {Distance::zero(), Distance(2), Distance::zero(), Distance(1), Distance(1)},
+        {Distance::zero(), Distance(1), Distance(1), Distance::zero(), Distance::zero()},
+        {Distance::zero(), Distance(1), Distance(1), Distance::zero(), Distance::zero()}
     };
     
     {
-        {Distance::zero, Distance(1), Distance::zero, Distance::zero, Distance::zero, Distance(3)},
-        {Distance(1), Distance::zero, Distance(3), Distance::zero, Distance(5), Distance(1)},
-        {Distance::zero, Distance(3), Distance::zero, Distance(2), Distance::zero, Distance::zero},
-        {Distance::zero, Distance::zero, Distance(2), Distance::zero, Distance(1), Distance(6)},
-        {Distance::zero, Distance(5), Distance::zero, Distance(1), Distance::zero, Distance(2)},
-        {Distance(3), Distance(1), Distance::zero, Distance(6), Distance(2), Distance::zero}
+        {Distance::zero(), Distance(1), Distance::zero(), Distance::zero(), Distance::zero(), Distance(3)},
+        {Distance(1), Distance::zero(), Distance(3), Distance::zero(), Distance(5), Distance(1)},
+        {Distance::zero(), Distance(3), Distance::zero(), Distance(2), Distance::zero(), Distance::zero()},
+        {Distance::zero(), Distance::zero(), Distance(2), Distance::zero(), Distance(1), Distance(6)},
+        {Distance::zero(), Distance(5), Distance::zero(), Distance(1), Distance::zero(), Distance(2)},
+        {Distance(3), Distance(1), Distance::zero(), Distance(6), Distance(2), Distance::zero()}
     };
     */
     /*
@@ -61,11 +61,11 @@ int main (void)
     a[4][2] = METRIC(Distance(1), Bandwidth(100));
     a[2][4] = METRIC(Distance(1), Bandwidth(100));
    
-    cout << "(" << Distance::zero << ")" << endl;
-    cout << "[" << Bandwidth::zero << "]" << endl;
-    cout << LexProduct<Distance, Bandwidth>(Distance::zero, Bandwidth::zero) << endl;
-    cout << METRIC::zero << endl;
-    cout << LexProduct<Distance, Bandwidth>::unity << endl;
+    cout << "(" << Distance::zero() << ")" << endl;
+    cout << "[" << Bandwidth::zero() << "]" << endl;
+    cout << LexProduct<Distance, Bandwidth>(Distance::zero(), Bandwidth::zero()) << endl;
+    cout << METRIC::zero() << endl;
+    cout << LexProduct<Distance, Bandwidth>::unity() << endl;
 
     Routing<METRIC, string> r(v, a);
     r.compute_seq();

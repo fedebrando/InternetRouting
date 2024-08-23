@@ -17,8 +17,8 @@ class Distance : public Weighable<Distance>
         double d;
 
     public:
-        static const Distance zero;
-        static const Distance unity;
+        static Distance zero();
+        static Distance unity();
         Distance();
         Distance(const Distance& dis);
         Distance(double d);
