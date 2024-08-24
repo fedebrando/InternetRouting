@@ -13,4 +13,6 @@ add_executable(main ${SOURCES})
 
 if(OpenMP_CXX_FOUND)
     target_link_libraries(main PUBLIC OpenMP::OpenMP_CXX)
+else()
+    message(FATAL_ERROR "OpenMP was not found. Make sure OpenMP is installed and try again.")
 endif()
