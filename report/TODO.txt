@@ -1,0 +1,18 @@
+1. semianello
+    tabella metriche
+    prod lessicograf
+
+2. dijkstra generale
+    algo
+    non perfetta correttezza di R
+
+3. chiamare dijkstra n volte
+    parallelizzazione
+    W/D
+
+4. implementazione
+
+5. problemi (confronto bellman-ford)
+
+6. conclusioni
+
