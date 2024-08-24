@@ -3,7 +3,7 @@ project(InternetRouting)
 
 set(CMAKE_CXX_STANDARD 20)
 
-include_directories(src/routing/algo src/routing/metrics src/routing/semiring src/routing/utilities)
+include_directories(src/algo src/metrics src/semiring src/utilities)
 
 file(GLOB_RECURSE SOURCES "src/*.cpp")
 
