@@ -9,8 +9,6 @@ Riferimenti bibliografici:
 [2] Griffin T. J., Lecture Notes, Algebraic Path Problems with applications to Internet Routing, Computer Laboratory, University of Cambridge, 2013.
 
 // TODO
--1. makefile
-0. riorganizzazione del codice
 (1.) fare stampa bella delle matrici
 (2.)* programma di routing (parsing file dati -> matrice adiacenza)
 (3.) parallelizzazione funzione getPi()
