@@ -96,11 +96,11 @@ class Routing
             #pragma omp parallel for schedule(static)
             for (int j = 0; j < v_vec.size(); j++)
             {
-                /*
+                
                 ostringstream os;
                 os << "Node " << v_vec[j] << " computed by " << omp_get_thread_num() << " (tot " << omp_get_num_threads() << ")" << endl;
                 cout << os.str();
-                */
+                
                 dijkstra(v_vec[j]);
             }
         }
