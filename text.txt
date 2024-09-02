@@ -14,3 +14,11 @@ Riferimenti bibliografici:
 (3.) parallelizzazione funzione getPi()
 4. relazione
 5. CUDA
+
+// TODOTODO
+1. rendere loop_free costante
+2. parallelizzare rombo
+3. metodo statico concept totally order per sapere se un semianello è totalmente ordinato
+4. di conseguenza anche lex_product
+5. fare dijkstra generico sfruttando 3. e 4.
+6. aggiornare metodo compute in base all'ordinamento della metrica
