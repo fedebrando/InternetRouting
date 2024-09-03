@@ -8,11 +8,17 @@
 
 #include <vector>
 #include <set>
-#include <omp.h>
 #include <sstream> // for parallel info printing
 #include "path.hpp"
 #include "semiring.hpp"
 #include "utilities.hpp"
+#include "settings.h"
+
+#ifdef PAR_OMP
+#include <omp.h>
+#endif
+
+using namespace std;
 
 template<Semiring E, typename T>
 class Routing
@@ -83,15 +89,20 @@ class Routing
 
         Routing& operator = (const Routing& r) = delete;
 
-        void compute_seq()
+#ifdef SEQ
+        void compute()
         {
             for (node i : v)
                 dijkstra(i);
         }
+#endif
 
-        void compute_par()
+#ifdef PAR_OMP
+        void compute()
         {
             vector<node> v_vec(v.begin(), v.end());
+
+            omp_set_nested(1);
 
             #pragma omp parallel for schedule(static)
             for (int j = 0; j < v_vec.size(); j++)
@@ -101,10 +112,10 @@ class Routing
                 os << "Node " << v_vec[j] << " computed by " << omp_get_thread_num() << " (tot " << omp_get_num_threads() << ")" << endl;
                 cout << os.str();
                 */
-                
                 dijkstra(v_vec[j]);
             }
         }
+#endif
 
         vector<vector<E>> getD() const
         {

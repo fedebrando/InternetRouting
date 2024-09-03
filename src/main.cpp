@@ -86,7 +86,7 @@ int main (void)
 
     Routing<METRIC, string> r(v, a);
 
-    r.compute_par();
+    r.compute();
     cout << r.getD() << endl;
     cout << r.getPi() << endl;
 

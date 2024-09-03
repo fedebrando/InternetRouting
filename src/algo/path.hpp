@@ -6,17 +6,24 @@
 #include <iostream>
 #include "edge.hpp"
 #include "utilities.hpp"
+#include "settings.h"
+
+#ifdef PAR_OMP
+#include <omp.h>
+#endif
 
 using namespace std;
 
 /*
  * Class Path<T> HAS-A Edge<T> 
 */
-template <typename T>
+template <Order T>
 class Path
 {
     private:
         vector<Edge<T>> path;
+        bool loop_free;
+        set<T> nodes;
 
         bool in(const vector<T>& v, T n)
         {
@@ -29,17 +36,21 @@ class Path
     public:
         static const Path<T> eps;
 
-        Path() : path()
+        Path() : path(), loop_free(true), nodes()
         {}
 
-        Path(const Path& p)
+        Path(const Path& p) : nodes(p.nodes)
         {
             path = vector<Edge<T>>(p.path);
+            loop_free = p.is_loop_free();
         }
 
         Path(Edge<T> e)
         {
             path.push_back(e);
+            loop_free = true;
+            nodes.insert(e.first);
+            nodes.insert(e.second);
         }
 
         vector<Edge<T>>::iterator begin()
@@ -62,28 +73,20 @@ class Path
             return path.end();
         }
 
-        bool loop_free()
+        bool is_loop_free() const
         {
-            vector<T> v;
-
-            if (path.empty())
-                return true;
-            v.push_back(path[0].first);
-            for (const Edge<T>& e : path)
-            {
-                if (in(v, e.second))
-                    return false;
-                v.push_back(e.second);
-            }
-            return true;
+            return loop_free;
         }
 
-        void insert(Edge<T> e)
+        void insert(Edge<T> e) //O(n)
         {
             if (!path.empty())
                 if (!(path.back().second == e.first))
                     return;
             path.push_back(e);
+            if (is_loop_free() && nodes.find(e.second) != nodes.end())
+                loop_free = false;
+            nodes.insert(e.second);
         }
 
         void clear()
@@ -91,7 +94,7 @@ class Path
             path.clear();
         }
 
-        Path operator + (const Path& other) const
+        Path operator + (const Path& other) const //O(n)
         {
             Path p;
 
@@ -100,7 +103,8 @@ class Path
                     throw runtime_error("Cannot concat non contiguous paths!");
 
             p.path.insert(p.path.end(), path.begin(), path.end());
-            p.path.insert(p.path.end(), other.path.begin(), other.path.end());
+            for (const Edge<T>& e : other)
+                p.insert(e);
             return p;
         }
 
@@ -137,11 +141,12 @@ class Path
         ~Path() = default;
 };
 
-template <typename T>
+template <Order T>
 const Path<T> Path<T>::eps;
 
-template <typename T>
-set<Path<T>> operator ^ (const set<Path<T>>& s1, const set<Path<T>>& s2)
+#ifdef SEQ
+template <Order T>
+set<Path<T>> operator ^ (const set<Path<T>>& s1, const set<Path<T>>& s2) //O(n^2)
 {
     set<Path<T>> res;
     Path<T> p;
@@ -150,13 +155,46 @@ set<Path<T>> operator ^ (const set<Path<T>>& s1, const set<Path<T>>& s2)
         for (const Path<T>& p2 : s2)
         {
             p = p1 + p2;
-            if (p.loop_free())
+            if (p.is_loop_free())
                 res.insert(p);
         }
     return res;
 }
+#endif
+#ifdef PAR_OMP
+template <Order T>
+set<Path<T>> operator ^ (const set<Path<T>>& s1, const set<Path<T>>& s2) //O(n^2)
+{
+    set<Path<T>> res;
+    Path<T> p;
+    vector<Path<T>> v1(s1.begin(), s1.end());
+    int size = v1.size();
 
-template <typename T>
+    #pragma omp parallel for schedule(dynamic, 1) shared(res)
+    for (int i = 0; i < v1.size(); i++)
+    {
+        /*
+        ostringstream os;
+        os << "Path computed by " << omp_get_thread_num() << " (tot " << omp_get_num_threads() << ")" << endl;
+        cout << os.str();
+        */
+        for (const Path<T>& p2 : s2)
+        {
+            p = v1[i] + p2;
+            if (p.is_loop_free())
+            {
+                #pragma omp critical
+                res.insert(p);
+            }
+        }
+    }
+    return res;
+}
+#endif
+#ifdef PAR_CUDA
+#endif
+
+template <Order T>
 void operator += (set<Path<T>>& s1, const set<Path<T>>& s2)
 {
     s1.insert(s2.begin(), s2.end());
