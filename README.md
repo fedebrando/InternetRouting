@@ -1,23 +1,23 @@
-#Internet Routing
-##Esecuzione sequenziale
-###Requisiti
+# Internet Routing
+## Esecuzione sequenziale
+### Requisiti
 gcc versione 10
-###Configurazione
+### Configurazione
 #define SEQ in /src/algo/settings.h
-##Esecuzione parallela con OpenMP
-###Requisiti
+## Esecuzione parallela con OpenMP
+### Requisiti
 gcc versione 10
 OpenMP installato
-###Configurazione
+### Configurazione
 #define PAR_OMP in /src/algo/settings.h
-##Esecuzione parallela con CUDA
-###Requisiti
+## Esecuzione parallela con CUDA
+### Requisiti
 gcc versione 10
 cuda versione ??
-###Configurazione
+### Configurazione
 #define PAR_CUDA in /src/algo/settings.h
-##Compilazione
+## Compilazione
 lanciare il comando make nella root del progetto
-##Esecuzione
+## Esecuzione
 lanciare il comando ./main nella root del progetto
   
