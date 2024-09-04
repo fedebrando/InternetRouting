@@ -11,8 +11,11 @@
     W/D
 
 4. implementazione
+    struttura progetto e si ehm esatto eh basta quello li e daahahahahi nono eheh eheheh va beh dai vaffanculo ma basta eh ahaha cosa sei il coso di google che scrive (incomprensibile) (silenzio) ...
+    openMP e cuda per parallelizzazione
+    tabella con tempi (3 colonne) (specificare hardware!!!!)
+    plot tempi
+    quando ci accorgeremo che la teoria fa acqua da tutte le parti giustificheremo dando la colpa all'overhead parallelo
 
-5. problemi (confronto bellman-ford)
-
-6. conclusioni
+6. conclusioni e sviluppi futuri + commento ai lettori della mancanza del punto 5.
 
