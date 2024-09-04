@@ -110,7 +110,8 @@ class Path
 
         bool operator < (const Path& other) const //necessary for set
         {
-            return path < other.path;
+            return path.size() < other.path.size();
+            //return path < other.path;
         }
 
         bool operator == (const Path& other) const
@@ -168,9 +169,8 @@ set<Path<T>> operator ^ (const set<Path<T>>& s1, const set<Path<T>>& s2) //O(n^2
     set<Path<T>> res;
     Path<T> p;
     vector<Path<T>> v1(s1.begin(), s1.end());
-    int size = v1.size();
 
-    #pragma omp parallel for schedule(dynamic, 1) shared(res)
+    #pragma omp parallel for schedule(dynamic) shared(res)
     for (int i = 0; i < v1.size(); i++)
     {
         /*

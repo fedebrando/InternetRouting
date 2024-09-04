@@ -6,13 +6,14 @@
 #include "lex_product.hpp"
 #include "utilities.hpp"
 
-#define METRIC LexProduct<Distance, Bandwidth>
+#define METRIC Distance
 
 using namespace std;
 
 int main (void) 
 {
-    vector<string> v = {"0", "1", "2", "3", "4"};
+    vector<string> v = {"0", "1", "2", "3", "4"
+    };
     vector<vector<METRIC>> a(v.size(), vector<METRIC>(v.size()));
     // distance del paper
     /*
@@ -24,6 +25,7 @@ int main (void)
         {Distance::zero(), Distance(1), Distance(1), Distance::zero(), Distance::zero()}
     };
     
+    
     // distance video yt
     {
         {Distance::zero(), Distance(1), Distance::zero(), Distance::zero(), Distance::zero(), Distance(3)},
@@ -34,6 +36,7 @@ int main (void)
         {Distance(3), Distance(1), Distance::zero(), Distance(6), Distance(2), Distance::zero()}
     };
     */
+    
 
     // distance * reliability
     /*
@@ -52,6 +55,7 @@ int main (void)
     */
 
     // distance * bandwidth
+    /*
     a[0][1] = METRIC(Distance(1), Bandwidth(10));
     a[1][0] = METRIC(Distance(1), Bandwidth(10));
     a[1][2] = METRIC(Distance(2), Bandwidth(90));
@@ -64,6 +68,21 @@ int main (void)
     a[2][3] = METRIC(Distance(1), Bandwidth(100));
     a[4][2] = METRIC(Distance(1), Bandwidth(100));
     a[2][4] = METRIC(Distance(1), Bandwidth(100));
+    */
+
+    a[0][1] = METRIC(Distance(1));
+    a[1][0] = METRIC(Distance(1));
+    a[1][2] = METRIC(Distance(2));
+    a[2][1] = METRIC(Distance(2));
+    a[1][3] = METRIC(Distance(1));
+    a[3][1] = METRIC(Distance(1));
+    a[1][4] = METRIC(Distance(1));
+    a[4][1] = METRIC(Distance(1));
+    a[3][2] = METRIC(Distance(1));
+    a[2][3] = METRIC(Distance(1));
+    a[4][2] = METRIC(Distance(1));
+    a[2][4] = METRIC(Distance(1));
+
 
     // bandwidth * distance
     /*

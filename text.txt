@@ -16,5 +16,6 @@ Riferimenti bibliografici:
 5. CUDA
 
 // TODOTODO
-1. cmake
+1. cmake / makefile
 2. CUDA
+3. decidere cosa fare con la parallelizzazione del rombo
