@@ -5,7 +5,7 @@ c_corpo_65 = c_rombo + c_+=
 c_rombo = O(p) * (c_+ + c_insert)
 c_+ = O(e) //problema riallocazione vector
 c_+= = O(p) * c_insert
-c_insert = O(logp) + O(e)
+c_insert = O(logp) + O(e) //colpa dell'==
 
 ipotesi:
 supponiamo che O(p) è uguale a O(e) e a O(n)
