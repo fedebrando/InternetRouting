@@ -3,7 +3,7 @@ STD = -std=c++20
 OMP = -fopenmp
 UTILITIES = src/utilities
 ALGO = src/algo
-METRICS = src/METRICS
+METRICS = src/metrics
 SEMIRING = src/semiring
 SRC = src
 
