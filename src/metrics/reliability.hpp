@@ -16,7 +16,6 @@ class Reliability : public Weighable<Reliability>
     private:
         double r;
 
-
     public:
         static Reliability zero();
         static Reliability unity();

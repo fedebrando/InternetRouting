@@ -173,11 +173,11 @@ set<Path<T>> operator ^ (const set<Path<T>>& s1, const set<Path<T>>& s2) //O(n^2
     #pragma omp parallel for schedule(dynamic) shared(res)
     for (int i = 0; i < v1.size(); i++)
     {
-        /*
+        
         ostringstream os;
         os << "Path computed by " << omp_get_thread_num() << " (tot " << omp_get_num_threads() << ")" << endl;
         cout << os.str();
-        */
+        
         for (const Path<T>& p2 : s2)
         {
             p = v1[i] + p2;

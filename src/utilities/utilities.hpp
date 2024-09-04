@@ -10,6 +10,7 @@
 #include <set>
 #include <concepts>
 #include <vector>
+#include <algorithm>
 
 using namespace std;
 
