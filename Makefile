@@ -38,4 +38,3 @@ $(OBJ)/utilities.o: $(UTILITIES)/utilities.cpp $(UTILITIES)/utilities.hpp
 
 clean:
 	rm -rf $(BUILD)
-
