@@ -4,6 +4,7 @@
 
 #define SEQ
 //#define PAR_OMP
-//#define PAR_CUDA 
+
+#define VERBOSE
 
 #endif

@@ -78,7 +78,7 @@ class Path
             return loop_free;
         }
 
-        void insert(Edge<T> e) //O(n)
+        void insert(Edge<T> e)
         {
             if (!path.empty())
                 if (!(path.back().second == e.first))
@@ -94,7 +94,7 @@ class Path
             path.clear();
         }
 
-        Path operator + (const Path& other) const //O(n)
+        Path operator + (const Path& other) const
         {
             Path p;
 
@@ -111,7 +111,6 @@ class Path
         bool operator < (const Path& other) const //necessary for set
         {
             return path.size() < other.path.size();
-            //return path < other.path;
         }
 
         bool operator == (const Path& other) const
@@ -147,7 +146,7 @@ const Path<T> Path<T>::eps;
 
 #ifdef SEQ
 template <Order T>
-set<Path<T>> operator ^ (const set<Path<T>>& s1, const set<Path<T>>& s2) //O(n^2)
+set<Path<T>> operator ^ (const set<Path<T>>& s1, const set<Path<T>>& s2)
 {
     set<Path<T>> res;
     Path<T> p;
@@ -162,9 +161,10 @@ set<Path<T>> operator ^ (const set<Path<T>>& s1, const set<Path<T>>& s2) //O(n^2
     return res;
 }
 #endif
+
 #ifdef PAR_OMP
 template <Order T>
-set<Path<T>> operator ^ (const set<Path<T>>& s1, const set<Path<T>>& s2) //O(n^2)
+set<Path<T>> operator ^ (const set<Path<T>>& s1, const set<Path<T>>& s2)
 {
     set<Path<T>> res;
     Path<T> p;
@@ -173,11 +173,11 @@ set<Path<T>> operator ^ (const set<Path<T>>& s1, const set<Path<T>>& s2) //O(n^2
     #pragma omp parallel for schedule(dynamic) shared(res)
     for (int i = 0; i < v1.size(); i++)
     {
-        
+#ifdef VERBOSE
         ostringstream os;
         os << "Path computed by " << omp_get_thread_num() << " (tot " << omp_get_num_threads() << ")" << endl;
         cout << os.str();
-        
+#endif
         for (const Path<T>& p2 : s2)
         {
             p = v1[i] + p2;
@@ -190,8 +190,6 @@ set<Path<T>> operator ^ (const set<Path<T>>& s1, const set<Path<T>>& s2) //O(n^2
     }
     return res;
 }
-#endif
-#ifdef PAR_CUDA
 #endif
 
 template <Order T>
