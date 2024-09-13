@@ -6,15 +6,106 @@
 #include "lex_product.hpp"
 #include "utilities.hpp"
 
-#define METRIC Distance
+/* include del nuovo main*/
+#include <fstream>
+#include <iostream> 
+#include <string> 
+#include <sstream>
+#include <unordered_map>
+#include <vector>
+#include <cmath>
+#include "node.hpp"
+
+#define SHORTEST_WIDEST 
 
 using namespace std;
 
-int main (void) 
+vector<string> split(const string& str, char delimiter) 
 {
-    vector<string> v = {"0", "1", "2", "3", "4"
-    };
-    vector<vector<METRIC>> a(v.size(), vector<METRIC>(v.size()));
+    vector<string> tokens;
+    string token;
+    stringstream ss(str);
+
+    while (getline(ss, token, delimiter)) 
+        tokens.push_back(token);
+    return tokens;
+}
+
+int main(void) 
+{
+    ifstream inputFile;  
+    vector<string> values;
+    string line; 
+    vector<Node> v;
+#ifdef SHORTEST_WIDEST
+    vector<vector<LexProduct<Distance, Bandwidth>>> a;
+    LexProduct<Distance, Bandwidth> lp;
+#else
+    vector<vector<LexProduct<Distance, Reliability>>> a;
+    LexProduct<Distance, Reliability> lp;
+#endif
+    
+    int first;
+    int second;
+
+    inputFile.open("../../data/node.dat");
+    if (!inputFile) 
+    { 
+        cerr << "Error opening \"data.dat\" file!" << endl;  
+        return 1; 
+    } 
+    getline(inputFile, line); // to skip header line
+    while (getline(inputFile, line)) 
+    {
+        values = split(line, ',');
+        v.push_back(Node(values[2], values[5], values[3], stod(values[1]), stod(values[4])));
+    }
+    inputFile.close(); 
+#ifdef SHORTEST_WIDEST
+    a = vector<vector<LexProduct<Distance, Bandwidth>>>(v.size(), vector<LexProduct<Distance, Bandwidth>>(v.size()));
+#else
+    a = vector<vector<LexProduct<Distance, Reliability>>>(v.size(), vector<LexProduct<Distance, Reliability>>(v.size()));
+#endif
+
+    inputFile.open("../../data/edge.dat");
+    if (!inputFile) 
+    { 
+        cerr << "Error opening \"edge.dat\" file!" << endl; 
+        return 1; 
+    } 
+    getline(inputFile, line); // to skip header line
+    while (getline(inputFile, line)) 
+    {
+        values = split(line, ',');
+        first = stoi(values[0]);
+        second = stoi(values[1]);
+#ifdef SHORTEST_WIDEST
+        lp = LexProduct<Distance, Bandwidth>(Distance(haversine(v[first], v[second])), Bandwidth(stod(values[3])));
+        a[first][second] = lp;
+        a[second][first] = lp;
+#else
+        lp = LexProduct<Distance, Reliability>(Distance(haversine(v[first], v[second])), Reliability(stod(values[2])));
+        a[first][second] = lp;
+        a[second][first] = lp;
+#endif
+    }
+    inputFile.close(); 
+
+#ifdef SHORTEST_WIDEST
+    Routing<LexProduct<Distance, Bandwidth>, Node> r(v, a);
+#else
+    Routing<LexProduct<Distance, Reliability>, Node> r(v, a);
+#endif
+
+    r.compute();
+    cout << r.getD() << endl;
+    cout << r.getPi() << endl;
+
+    return 0; 
+
+
+    //vector<string> v = {"0", "1", "2", "3", "4"};
+    //vector<vector<METRIC>> a(v.size(), vector<METRIC>(v.size()));
     // distance del paper
     /*
     {
@@ -70,6 +161,7 @@ int main (void)
     a[2][4] = METRIC(Distance(1), Bandwidth(100));
     */
 
+    /*
     a[0][1] = METRIC(Distance(1));
     a[1][0] = METRIC(Distance(1));
     a[1][2] = METRIC(Distance(2));
@@ -82,6 +174,7 @@ int main (void)
     a[2][3] = METRIC(Distance(1));
     a[4][2] = METRIC(Distance(1));
     a[2][4] = METRIC(Distance(1));
+    */
 
 
     // bandwidth * distance
@@ -103,11 +196,13 @@ int main (void)
     cout << LexProduct<Distance, Bandwidth>::unity() << endl;
     */
 
+    /*
     Routing<METRIC, string> r(v, a);
 
     r.compute();
     cout << r.getD() << endl;
     cout << r.getPi() << endl;
+    */
 
-    return 0;
+    //return 0;
 }

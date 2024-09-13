@@ -6,11 +6,6 @@
 #include <iostream>
 #include "edge.hpp"
 #include "utilities.hpp"
-#include "settings.h"
-
-#ifdef PAR_OMP
-#include <omp.h>
-#endif
 
 using namespace std;
 
@@ -144,7 +139,6 @@ class Path
 template <Order T>
 const Path<T> Path<T>::eps;
 
-#ifdef SEQ
 template <Order T>
 set<Path<T>> operator ^ (const set<Path<T>>& s1, const set<Path<T>>& s2)
 {
@@ -160,37 +154,6 @@ set<Path<T>> operator ^ (const set<Path<T>>& s1, const set<Path<T>>& s2)
         }
     return res;
 }
-#endif
-
-#ifdef PAR_OMP
-template <Order T>
-set<Path<T>> operator ^ (const set<Path<T>>& s1, const set<Path<T>>& s2)
-{
-    set<Path<T>> res;
-    Path<T> p;
-    vector<Path<T>> v1(s1.begin(), s1.end());
-
-    #pragma omp parallel for schedule(dynamic) shared(res)
-    for (int i = 0; i < v1.size(); i++)
-    {
-#ifdef VERBOSE
-        ostringstream os;
-        os << "Path computed by " << omp_get_thread_num() << " (tot " << omp_get_num_threads() << ")" << endl;
-        cout << os.str();
-#endif
-        for (const Path<T>& p2 : s2)
-        {
-            p = v1[i] + p2;
-            if (p.is_loop_free())
-            {
-                #pragma omp critical
-                res.insert(p);
-            }
-        }
-    }
-    return res;
-}
-#endif
 
 template <Order T>
 void operator += (set<Path<T>>& s1, const set<Path<T>>& s2)

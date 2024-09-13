@@ -18,7 +18,7 @@ all: create_dirs $(OUT)
 create_dirs:
 	mkdir -p $(OBJ) $(BIN)
 
-$(BIN)/main: $(OBJ)/main.o $(OBJ)/distance.o $(OBJ)/bandwidth.o $(OBJ)/reliability.o $(OBJ)/utilities.o
+$(BIN)/main: $(OBJ)/main.o $(OBJ)/distance.o $(OBJ)/bandwidth.o $(OBJ)/reliability.o $(OBJ)/utilities.o $(OBJ)/node.o 
 	$(CC) $(OMP) $(STD) -o $@ $^
 
 $(OBJ)/main.o: $(SRC)/main.cpp $(ALGO)/routing.hpp $(ALGO)/path.hpp $(ALGO)/edge.hpp $(ALGO)/settings.h $(METRICS)/metrics.hpp $(SEMIRING)/semiring.hpp $(SEMIRING)/lex_product.hpp $(UTILITIES)/utilities.hpp 
@@ -34,6 +34,9 @@ $(OBJ)/distance.o: $(METRICS)/distance.cpp $(METRICS)/distance.hpp $(SEMIRING)/s
 	$(CC) $(OMP) $(STD) -I$(SEMIRING) -c -o $@ $<
 
 $(OBJ)/utilities.o: $(UTILITIES)/utilities.cpp $(UTILITIES)/utilities.hpp
+	$(CC) $(OMP) $(STD) -c -o $@ $<
+
+$(OBJ)/node.o: $(UTILITIES)/node.cpp $(UTILITIES)/node.hpp
 	$(CC) $(OMP) $(STD) -c -o $@ $<
 
 clean:
