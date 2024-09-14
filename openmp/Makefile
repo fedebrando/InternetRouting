@@ -22,7 +22,7 @@ create_dirs:
 $(BIN)/main: $(OBJ)/main.o $(OBJ)/distance.o $(OBJ)/bandwidth.o $(OBJ)/reliability.o $(OBJ)/utilities.o $(OBJ)/node.o $(OBJ)/reading_data.o
 	$(CC) $(OMP) $(STD) -o $@ $^
 
-$(OBJ)/main.o: $(SRC)/main.cpp $(ALGO)/routing.hpp $(ALGO)/path.hpp $(ALGO)/edge.hpp $(ALGO)/settings.h $(METRICS)/metrics.hpp $(SEMIRING)/semiring.hpp $(SEMIRING)/lex_product.hpp $(UTILITIES)/utilities.hpp 
+$(OBJ)/main.o: $(SRC)/main.cpp $(ALGO)/routing.hpp $(ALGO)/path.hpp $(ALGO)/edge.hpp $(ALGO)/settings.h $(METRICS)/metrics.hpp $(SEMIRING)/semiring.hpp $(SEMIRING)/lex_product.hpp $(UTILITIES)/utilities.hpp $(R_DATA)/reading_data.hpp $(UTILITIES)/node.hpp
 	$(CC) $(OMP) $(STD) -I$(ALGO) -I$(METRICS) -I$(SEMIRING) -I$(UTILITIES) -I$(R_DATA) -c -o $@ $<
 
 $(OBJ)/reliability.o: $(METRICS)/reliability.cpp $(METRICS)/reliability.hpp $(SEMIRING)/semiring.hpp
