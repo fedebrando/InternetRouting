@@ -7,6 +7,7 @@
 #define UTILITIES
 
 #include <iostream>
+#include <sstream>
 #include <set>
 #include <concepts>
 #include <vector>
@@ -32,30 +33,49 @@ concept Print = requires(ostream& os, T a)
 template <Print T>
 ostream& operator << (ostream& os, const set<T>& s)
 {
-    os << "{";
+    ostringstream oss;
+    string str;
+
+    oss << "{";
     for (const T& e : s)
-        os << e << ", ";
-    os << (s.empty() ? "" : "\b\b") << "}";
+        oss << e << ", ";
+    str = oss.str();
+    if (!s.empty())
+    {
+        str.pop_back();
+        str.pop_back();
+    }
+    os << str << "}";
     return os;
 }
 
 template <Print T>
 ostream& operator << (ostream& os, const vector<T>& v)
 {
+    ostringstream oss;
+    string str;
+
     for (const T& e : v)
-        os << e << " ";
+        oss << e << " ";
+    str = oss.str();
     if (!v.empty())
-        os << "\b";
+        str.pop_back();
+    os << str;
     return os;
 }
 
 template <Print T>
 ostream& operator << (ostream& os, const vector<vector<T>>& v)
 {
+    ostringstream oss;
+    string str;
+
     for (const vector<T>& e : v)
-        os << e << "\n";
+        oss << e << "\n";
+    str = oss.str();
     if (!v.empty())
-        os << "\b";
+        str.pop_back();
+    os << str;
     return os;
 }
 

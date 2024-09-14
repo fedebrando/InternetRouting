@@ -2,8 +2,8 @@
 #ifndef SETTINGS
 #define SETTINGS
 
-//#define SEQ
-#define PAR_OMP
+#define SEQ
+//#define PAR_OMP
 
 #define VERBOSE
 

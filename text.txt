@@ -16,7 +16,6 @@ Riferimenti bibliografici:
 5. CUDA
 
 // TODOTODO
-0. mettere a posto progetto parte c++
-1. rivedere stampe (\b)
+1. node.hpp
 2. CUDA + makefile
 3. leggere file .dat in c
