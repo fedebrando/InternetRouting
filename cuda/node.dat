@@ -1,0 +1,150 @@
+ID,latitude,country,type,longitude,label
+0,48.30639,Austria,Colt connected City,14.28611,Linz
+1,47.42391,Switzerland,Colt connected City,9.37477,St Pollen
+2,54.0887,Germany,Colt connected City,12.14049,Rostock
+3,52.39886,Germany,Colt connected City,13.06566,Potsdam
+4,51.33962,Germany,Colt connected City,12.37129,Leipzig
+5,51.05089,Germany,Colt connected City,13.73832,Dresden
+6,50.08333,Poland,Colt connected City,19.91667,Krakov
+7,52.22977,Poland,Colt connected City,21.01178,Warsaw
+8,49.44778,Germany,Colt connected City,11.06833,Nuremberg
+9,48.30603,Germany,Colt connected City,11.90686,Erding
+10,48.20849,Austria,MAN,16.37208,Vienna
+11,50.08804,Czech Republic,MAN,14.42076,Prague
+12,49.48833,Germany,Colt connected City,8.46472,Mannheim
+13,48.13743,Germany,MAN,11.57549,Munich
+14,50.93333,Germany,MAN,6.95,Cologne
+15,52.07667,Netherlands,MAN,4.29861,The Hague
+16,52.37052,Germany,MAN,9.73322,Hannover
+17,51.22172,Germany,MAN,6.77616,Dusseldorf
+18,51.21667,Belgium,MAN,4.41667,Antwerp
+19,51.9225,Netherlands,MAN,4.47917,Rotterdam
+20,38.80097,Portugal,Colt connected City,-9.37826,Sintra
+21,37.50213,Italy,Colt connected City,15.08719,Catania
+22,41.15,Portugal,MAN,-8.61667,Porto
+23,38.71667,Portugal,Data Centre and MAN,-9.13333,Lisbon
+24,40.72722,Italy,Colt connected City,8.56028,Sassari
+25,41.11773,Italy,Colt connected City,16.85118,Bari
+26,38.11582,Italy,Colt connected City,13.35976,Palermo
+27,39.20738,Italy,Colt connected City,9.13462,Cagliari
+28,52.98333,United Kingdom,Colt connected City,-0.01667,Boston
+29,59.38333,Sweden,Colt connected City,16.43333,Chicago
+30,49.00472,Germany,Colt connected City,8.38583,Karlsruhe
+31,48.68333,Germany,Colt connected City,9.01667,Boblingen
+32,47.36453,Switzerland,Colt connected City,8.79202,Pfaffikon
+33,47.42971,Switzerland,Colt connected City,9.37614,St Gallen
+34,48.73961,Germany,Colt connected City,9.30473,Esslingen
+35,47.5,Switzerland,Colt connected City,8.75,Winterthur
+36,46.516,Switzerland,Colt connected City,6.63282,Lausanne
+37,47.1324,Switzerland,Colt connected City,7.24411,Biel/Bienne
+38,47.7,Switzerland,Colt connected City,8.63333,Schaffhausen
+39,46.38318,Switzerland,Colt connected City,6.23955,Nyon
+40,50.41667,Belgium,Colt connected City,4.43333,Charleroi
+41,50.64119,Belgium,Colt connected City,5.57178,Liege
+42,50.83619,Belgium,Colt connected City,4.31454,Anderlecht
+43,50.45413,Belgium,Colt connected City,3.95229,Mons
+44,50.87959,Belgium,Colt connected City,4.70093,Leuven
+45,51.44083,Netherlands,Colt connected City,5.47778,Eindhoven
+46,49.61167,Luxembourg,Colt connected City,6.13,Luxembourg
+47,50.86667,Belgium,Colt connected City,4.4,Evere
+48,51.58656,Netherlands,Colt connected City,4.77596,Breda
+49,51.69917,Netherlands,Colt connected City,5.30417,Den Bosch
+50,55.67594,Denmark,Data Centre and MAN,12.56553,Copenhagen
+51,53.55,Germany,Data Centre and MAN,10.0,Hamburg
+52,55.60587,Sweden,Colt connected City,13.00073,Malmo
+53,56.15674,Denmark,Colt connected City,10.21076,Aarhus
+54,53.06667,United Kingdom,Colt connected City,-0.81667,Newark
+55,53.07897,United Kingdom,Colt connected City,-0.14008,New York
+56,59.33258,Sweden,MAN,18.0649,Stockholm
+57,60.16952,Finland,Colt connected City,24.93545,Helsinki
+58,57.70716,Sweden,Colt connected City,11.96679,Gothenburg
+59,59.91273,Norway,Colt connected City,10.74609,Oslo
+60,40.62773,Italy,Colt connected City,17.93682,Brindisi
+61,47.05048,Switzerland,Colt connected City,8.30635,Lucerne
+62,45.83333,Switzerland,Colt connected City,9.03333,Chiasso
+63,45.04676,Italy,Colt connected City,9.69937,Piacenza
+64,44.40632,Italy,Colt connected City,8.93386,Genova
+65,43.54264,Italy,Colt connected City,10.316,Livorno
+66,43.76667,Italy,Colt connected City,11.25,Firenze
+67,44.06333,Italy,Colt connected City,12.58083,Rimini
+68,44.80266,Italy,Colt connected City,10.32898,Parma
+69,45.82908,Italy,Colt connected City,8.82193,Varese
+70,45.80998,Italy,Colt connected City,9.08744,Como
+71,47.36667,Switzerland,Data Centre and MAN,8.55,Zurich
+72,53.34399,Ireland,MAN,-6.26719,Dublin
+73,53.48095,United Kingdom,MAN,-2.23743,Manchester
+74,52.46667,United Kingdom,MAN,-1.91667,Birmingham
+75,51.05,Belgium,MAN,3.71667,Ghent
+76,39.46975,Spain,MAN,-0.37739,Valencia
+77,41.89474,Italy,MAN,12.4839,Rome
+78,43.29695,France,MAN,5.38107,Marseille
+79,43.70313,France,Colt connected City,7.26608,Nice
+80,43.6,France,Colt connected City,3.88333,Montpellier
+81,45.16667,France,Colt connected City,5.71667,Grenoble
+82,44.83333,France,Colt connected City,-0.56667,Bordeaux
+83,45.70237,Italy,Colt connected City,8.45813,Borgomanero
+84,45.44056,Italy,Colt connected City,8.61684,Novara
+85,45.55986,Italy,Colt connected City,8.05002,Biella
+86,44.39733,Italy,Colt connected City,7.54453,Cuneo
+87,51.45625,United Kingdom,Colt connected City,-0.97113,Reading
+88,55.4904,Denmark,Colt connected City,9.47216,Kolding
+89,40.83333,Italy,Colt connected City,14.25,Napoli
+90,51.22339,Belgium,Colt connected City,2.91185,Ostend
+91,45.43861,Italy,Colt connected City,12.32667,Venezia
+92,45.66667,Italy,Colt connected City,12.245,Treviso
+93,47.06667,Austria,Colt connected City,15.45,Graz
+94,48.14816,Slovakia,Colt connected City,17.10674,Bratislava
+95,47.79941,Austria,Colt connected City,13.04399,Salzburg
+96,46.62472,Austria,Colt connected City,14.30528,Klagenfurt
+97,47.49801,Hungary,Colt connected City,19.03991,Budapest
+98,47.26266,Austria,Colt connected City,11.39454,Innsbruck
+99,46.06787,Italy,Colt connected City,11.12108,Trento
+100,44.43225,Romania,Colt connected City,26.10626,Bucharest
+101,44.64783,Italy,Colt connected City,10.92539,Modena
+102,44.69825,Italy,Colt connected City,10.63125,Reggio Emilia
+103,45.41519,Italy,Colt connected City,11.88181,Padova
+104,44.49381,Italy,Colt connected City,11.33875,Bologna
+105,45.69798,Italy,Colt connected City,9.66895,Bergamo
+106,45.58248,Italy,Colt connected City,9.27485,Monza
+107,45.43419,Italy,Colt connected City,10.99779,Verona
+108,45.52478,Italy,Colt connected City,10.22727,Brescia
+109,45.64861,Italy,Colt connected City,13.78,Trieste
+110,45.55729,Italy,Colt connected City,11.5409,Vicenza
+111,50.63333,France,Colt connected City,3.06667,Lille
+112,50.82803,Belgium,Colt connected City,3.26487,Kortnijk
+113,47.56667,Switzerland,MAN,7.6,Basel
+114,48.58333,France,MAN,7.75,Strasbourg
+115,48.78232,Germany,MAN,9.17702,Stuttgart
+116,46.94809,Switzerland,MAN,7.44744,Bern
+117,47.21725,France,MAN,-1.55336,Nantes
+118,43.60426,France,MAN,1.44367,Toulouse
+119,45.75,France,MAN,4.85,Lyon
+120,46.20222,Switzerland,MAN,6.14569,Geneve
+121,47.16667,Switzerland,MAN,8.51667,Zug
+122,46.01008,Switzerland,MAN,8.96004,Lugano
+123,53.07516,Germany,Colt connected City,8.80777,Bremen
+124,52.16667,Germany,Colt connected City,11.66667,Magdemburg
+125,52.09083,Netherlands,Colt connected City,5.12222,Utrecht
+126,52.37025,Netherlands,Colt connected City,5.21413,Almere
+127,52.22333,Netherlands,Colt connected City,5.17639,Hilversum
+128,52.3025,Netherlands,Colt connected City,4.68889,Hoofddorp
+129,51.2,Germany,Colt connected City,6.68333,Neuss
+130,51.26667,Germany,Colt connected City,7.18333,Wuppertal
+131,51.51667,Germany,Colt connected City,7.45,Dortmund
+132,51.45,Germany,Colt connected City,7.01667,Essen
+133,41.38879,Spain,Data Centre and MAN,2.15899,Barcelona
+134,45.07049,Italy,Data Centre and MAN,7.68682,Turin
+135,48.85341,France,Data Centre and MAN,2.3488,Paris
+136,51.50853,United Kingdom,Data Centre and MAN,-0.12574,London
+137,50.11667,Germany,Data Centre and MAN,8.68333,Frankfurt
+138,50.85045,Belgium,Data Centre and MAN,4.34878,Brussels
+139,52.37403,Netherlands,Data Centre and MAN,4.88969,Amsterdam
+140,52.52437,Germany,Data Centre and MAN,13.41053,Berlin
+141,47.31667,France,Colt connected City,5.01667,Dijon
+142,47.38333,France,Colt connected City,0.68333,Tours
+143,46.58333,France,Colt connected City,0.33333,Poitiers
+144,48.08333,France,Colt connected City,-1.68333,Rennes
+145,49.44313,France,Colt connected City,1.09932,Rouen
+146,51.45,United Kingdom,Colt connected City,-2.58333,Bristol
+147,40.4165,Spain,Data Centre and MAN,-3.70256,Madrid
+148,45.46427,Italy,Data Centre and MAN,9.18951,Milan
