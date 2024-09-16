@@ -26,13 +26,11 @@ int main(void)
     if (n_nodes == ERR)
         exit(ERR);
     v = (Node*) malloc(sizeof(Node) * n_nodes);
-    if(getV(v, "../../data/node.dat") == ERR)
+    if(getV("../../data/node.dat", v) == ERR)
         exit(ERR);
-
     a = (double***) malloc(sizeof(double**) * n_nodes);
     for (int i = 0; i < n_nodes; i++)
         a[i] = (double**) malloc(sizeof(double*) * n_nodes);
-    
     for (int i = 0; i < n_nodes; i++)
         for (int j = 0; j < n_nodes; j++)
         {
@@ -40,7 +38,6 @@ int main(void)
             a[i][j][0] = INFINITY;
             a[i][j][1] = 0;
         }
-
     if (getA("../../data/edge.dat", v, a) == -1)
         exit(ERR);
 

@@ -33,7 +33,7 @@ int get_num_values(const char* line)
     return count;
 }
 
-int getV(Node* v, const char* filename)
+int getV(const char* filename, Node* v)
 {
     FILE* file = fopen(filename, "r");
     int n_values;
@@ -45,7 +45,6 @@ int getV(Node* v, const char* filename)
         perror("Error in opening file!");
         return ERR;
     }
-
     fgets(line, sizeof(line), file); //skip first line
     n_values = get_num_values(line);
     values = (char **) malloc(sizeof(char*) * n_values);
@@ -83,7 +82,6 @@ int getA(const char* filename, const Node* v, double*** a)
         perror("Error in opening file!");
         return ERR;
     }
-
     fgets(line, sizeof(line), file);
     n_values = get_num_values(line);
     values = (char **) malloc(sizeof(char*) * n_values);
@@ -107,7 +105,6 @@ int getA(const char* filename, const Node* v, double*** a)
         a[second][first][1] = reliability;
 #endif
     }
-
     fclose(file);
     return 0;
 }

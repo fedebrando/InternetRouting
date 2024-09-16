@@ -7,7 +7,7 @@
 
 #define MAX_STRING_LENGTH 25
 
-typedef struct Node
+typedef struct
 {
     char country[MAX_STRING_LENGTH];
     char label[MAX_STRING_LENGTH];

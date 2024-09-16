@@ -7,7 +7,7 @@
 #include <stdlib.h>
 #include "node.h"
 
-//#define SHORTEST_WIDEST 
+#define SHORTEST_WIDEST 
 
 #define MAX_LINE_LENGTH 1024
 #define MAX_STRING_LENGTH 25
@@ -15,7 +15,7 @@
 
 int get_num_nodes(const char* filename);
 int get_num_values(const char* line);
-int getV(Node* v, const char* filename);
+int getV(const char* filename, Node* v);
 int getA(const char* filename, const Node* v, double*** a);
 
 #endif

@@ -122,6 +122,7 @@ class Routing
             return d;
         }
 
+        // may be parellelized in the future
         vector<vector<set<Path<T>>>> getPi() const
         {
             vector<vector<set<Path<T>>>> pi_info(pi.size(), vector<set<Path<T>>>(pi.size()));
