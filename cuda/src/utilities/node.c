@@ -1,24 +1,17 @@
-#include <stdio.h>
-#include <math.h>
 
-#define MAX_LINE_LENGTH 1024
-#define MAX_STRING_LENGTH 25
-#define ERR -1
+#include "node.h"
 
-typedef struct 
+void Node_print(Node n)
 {
-    char country[MAX_STRING_LENGTH];
-    char label[MAX_STRING_LENGTH];
-    char type[MAX_STRING_LENGTH];
-    double latitude;
-    double longitude;
-} Node;
+    printf("%s", n.label);
+}
 
 double to_radians(double degree) 
 {
     return degree * M_PI / 180.0;
 }
 
+// Returns the real distance in km between two points on the Earth
 double haversine(Node n1, Node n2)
 {
     const double R = 6371.0; // Earth radius in km
@@ -30,13 +23,7 @@ double haversine(Node n1, Node n2)
     lon2_rad = to_radians(n2.longitude);
     dLat_rad = lat2_rad - lat1_rad;
     dLon_rad = lon2_rad - lon1_rad;
-    double g = dLat_rad / 2;
-    a = sin(g) ;
+    a = sin(dLat_rad / 2.0) * sin(dLat_rad / 2) + cos(lat1_rad) * cos(lat2_rad) * sin(dLon_rad / 2) * sin(dLon_rad / 2);
+    c = 2 * atan2(sqrt(a), sqrt(1 - a));
     return R * c;
-}
-
-int main(void)
-{
-    printf("%f", cos(0));
-    return 0;
 }
