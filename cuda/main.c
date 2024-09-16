@@ -100,6 +100,7 @@ int main(void)
         print_Node(nodes[i]);
         printf("\n");
     }
+    
 
     return 0;
 }
