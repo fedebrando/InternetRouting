@@ -6,6 +6,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include "node.h"
+#include "lp.h"
 
 #define SHORTEST_WIDEST 
 
@@ -16,6 +17,6 @@
 int get_num_nodes(const char* filename);
 int get_num_values(const char* line);
 int getV(const char* filename, Node* v);
-int getA(const char* filename, const Node* v, double*** a);
+int getA(const char* filename, const Node* v, lex_product* a, int n);
 
 #endif

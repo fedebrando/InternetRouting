@@ -63,7 +63,7 @@ int getV(const char* filename, Node* v)
     return 0;
 }
 
-int getA(const char* filename, const Node* v, double*** a)
+int getA(const char* filename, const Node* v, lex_product* a, int n)
 {
     FILE *file = fopen(filename, "r");
     int n_values;
@@ -93,16 +93,14 @@ int getA(const char* filename, const Node* v, double*** a)
         first = atoi(values[0]);
         second = atoi(values[1]);
         distance = haversine(v[first], v[second]);
-        a[first][second][0] = distance;
-        a[second][first][0] = distance;
 #ifdef SHORTEST_WIDEST
         bandwidth = atof(values[3]);
-        a[first][second][1] = bandwidth;
-        a[second][first][1] = bandwidth;
+        a[idx(first, second, n)] = (lex_product) {distance, bandwidth};
+        a[idx(second, first, n)] = (lex_product) {distance, bandwidth};
 #else
         reliability = atof(values[2]);
-        a[first][second][1] = reliability;
-        a[second][first][1] = reliability;
+        a[idx(first, second, n)] = (lex_product) {distance, reliability};
+        a[idx(second, first, n)] = (lex_product) {distance, reliability};
 #endif
     }
     fclose(file);
