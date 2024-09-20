@@ -1,9 +1,13 @@
 
-CC = gcc
+CC = nvcc
+ARCH = -arch=sm_75#a100
+# ARCH = -arch=compute_60 #p100
+RDC = -rdc=true
+CUDA = -lcudadevrt
 SRC = src
-MATH = -lm
-SRC = src
+ALGO = $(SRC)/algo
 UTILITIES = $(SRC)/utilities
+METRICS = $(SRC)/metrics
 R_DATA = $(SRC)/reading_data
 
 BUILD = build
@@ -17,20 +21,47 @@ all: create_dirs $(OUT)
 create_dirs:
 	mkdir -p $(OBJ) $(BIN)
 
-$(BIN)/main: $(OBJ)/main.o $(OBJ)/node.o $(OBJ)/reading_data.o $(OBJ)/lp.o
-	$(CC) -o $@ $^ $(MATH)
+$(BIN)/main: $(OBJ)/main.o $(OBJ)/nset.o $(OBJ)/path.o $(OBJ)/pset.o $(OBJ)/lex_product.o $(OBJ)/distance.o $(OBJ)/bandwidth.o $(OBJ)/reliability.o $(OBJ)/wsp_or_mrsp.o $(OBJ)/routing.o $(OBJ)/utilities.o $(OBJ)/reading_data.o $(OBJ)/node.o
+	$(CC) $(ARCH) $(RDC) $^ -o $@ $(CUDA)
 
-$(OBJ)/main.o: $(SRC)/main.c $(OBJ)/node.o $(OBJ)/reading_data.o $(OBJ)/lp.o
-	$(CC) -I$(UTILITIES) -I$(R_DATA) -c -o $@ $<
+$(OBJ)/main.o: $(SRC)/main.cu $(UTILITIES)/nset.cuh $(UTILITIES)/path.cuh $(UTILITIES)/pset.cuh $(METRICS)/lex_product.cuh $(METRICS)/wsp_or_mrsp.cuh $(UTILITIES)/utilities.cuh $(R_DATA)/reading_data.cuh $(R_DATA)/node.cuh
+	$(CC) $(ARCH) -I$(UTILITIES) -I$(METRICS) -I$(ALGO) -I$(R_DATA) -dc $< -o $@
 
-$(OBJ)/reading_data.o: $(R_DATA)/reading_data.c $(R_DATA)/reading_data.h $(OBJ)/node.o $(OBJ)/lp.o
-	$(CC) -I$(UTILITIES) -c -o $@ $<
+$(OBJ)/routing.o: $(ALGO)/routing.cu $(ALGO)/routing.cuh $(UTILITIES)/utilities.cuh $(UTILITIES)/nset.cuh $(UTILITIES)/path.cuh $(UTILITIES)/pset.cuh $(METRICS)/lex_product.cuh $(METRICS)/wsp_or_mrsp.cuh
+	$(CC) $(ARCH) -I$(UTILITIES) -I$(METRICS) -dc $< -o $@
 
-$(OBJ)/node.o: $(UTILITIES)/node.c $(UTILITIES)/node.h
-	$(CC) -c -o $@ $< $(MATH)
+$(OBJ)/wsp_or_mrsp.o: $(METRICS)/wsp_or_mrsp.cu $(METRICS)/wsp_or_mrsp.cuh $(METRICS)/lex_product.cuh $(METRICS)/distance.cuh $(METRICS)/bandwidth.cuh $(METRICS)/reliability.cuh $(METRICS)/metric_hyperparams.h
+	$(CC) $(ARCH) -dc $< -o $@
 
-$(OBJ)/lp.o: $(UTILITIES)/lp.c $(UTILITIES)/lp.h
-	$(CC) -c -o $@ $<
+$(OBJ)/reliability.o: $(METRICS)/reliability.cu $(METRICS)/reliability.cuh
+	$(CC) $(ARCH) -dc $< -o $@
+
+$(OBJ)/bandwidth.o: $(METRICS)/bandwidth.cu $(METRICS)/bandwidth.cuh
+	$(CC) $(ARCH) -dc $< -o $@
+
+$(OBJ)/distance.o: $(METRICS)/distance.cu $(METRICS)/distance.cuh
+	$(CC) $(ARCH) -dc $< -o $@
+
+$(OBJ)/lex_product.o: $(METRICS)/lex_product.cu $(METRICS)/lex_product.cuh
+	$(CC) $(ARCH) -dc $< -o $@
+
+$(OBJ)/pset.o: $(UTILITIES)/pset.cu $(UTILITIES)/pset.cuh $(UTILITIES)/utilities.cuh $(UTILITIES)/path.cuh
+	$(CC) $(ARCH) -dc $< -o $@
+
+$(OBJ)/path.o: $(UTILITIES)/path.cu $(UTILITIES)/path.cuh $(UTILITIES)/utilities.cuh
+	$(CC) $(ARCH) -dc $< -o $@
+
+$(OBJ)/nset.o: $(UTILITIES)/nset.cu $(UTILITIES)/nset.cuh $(UTILITIES)/utilities.cuh
+	$(CC) $(ARCH) -dc $< -o $@
+
+$(OBJ)/utilities.o: $(UTILITIES)/utilities.cu $(UTILITIES)/utilities.cuh
+	$(CC) $(ARCH) -dc $< -o $@
+
+$(OBJ)/reading_data.o: $(R_DATA)/reading_data.cu $(R_DATA)/reading_data.cuh $(METRICS)/lex_product.cuh $(UTILITIES)/utilities.cuh $(R_DATA)/node.cuh 
+	$(CC) $(ARCH) -I$(UTILITIES) -I$(METRICS) -I$(R_DATA) -dc $< -o $@
+
+$(OBJ)/node.o: $(R_DATA)/node.cu $(R_DATA)/node.cuh
+	$(CC) $(ARCH) -dc $< -o $@
 
 clean:
 	rm -rf $(BUILD)

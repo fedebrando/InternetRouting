@@ -1,18 +1,18 @@
 
-#include "node.h"
+#include "node.cuh"
 
-void Node_print(Node n)
+__host__ void Node_print(Node n)
 {
     printf("%s", n.label);
 }
 
-double to_radians(double degree) 
+__host__ double to_radians(double degree) 
 {
     return degree * M_PI / 180.0;
 }
 
 // Returns the real distance in km between two points on the Earth
-double haversine(Node n1, Node n2)
+__host__ double haversine(Node n1, Node n2)
 {
     const double R = 6371.0; // Earth radius in km
     double lat1_rad, lon1_rad, lat2_rad, lon2_rad, dLat_rad, dLon_rad, a, c;

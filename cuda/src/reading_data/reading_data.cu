@@ -1,7 +1,7 @@
 
-#include "reading_data.h"
+#include "reading_data.cuh"
 
-int get_num_nodes(const char* filename)
+__host__ int get_num_nodes(const char* filename)
 {
     FILE* file = fopen(filename, "r");
     int n_nodes = 0;
@@ -19,7 +19,7 @@ int get_num_nodes(const char* filename)
     return n_nodes;
 }
 
-int get_num_values(const char* line)
+__host__ int get_num_values(const char* line)
 {
     int count = 1;
     const char *ptr = line;
@@ -33,7 +33,7 @@ int get_num_values(const char* line)
     return count;
 }
 
-int getV(const char* filename, Node* v)
+__host__ int getV(const char* filename, Node* v)
 {
     FILE* file = fopen(filename, "r");
     int n_values;
@@ -63,7 +63,7 @@ int getV(const char* filename, Node* v)
     return 0;
 }
 
-int getA(const char* filename, const Node* v, lex_product* a, int n)
+__host__ int getA(const char* filename, const Node* v, lex_product* a, int n)
 {
     FILE *file = fopen(filename, "r");
     int n_values;
