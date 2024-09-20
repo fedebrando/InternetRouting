@@ -19,3 +19,21 @@ Riferimenti bibliografici:
 1. node.hpp
 2. CUDA + makefile
 3. leggere file .dat in c
+
+ULTIMO //TODO
+2. Aggiungere funzioni lettura file per problema con 152 nodi
+3. Aggiustare il Makefile
+4. Sistemare la funzione dei pset che alloca sulla GPU con malloc (non va) -> else: termina prg con error mess
+5. int -> unsigned int
+6. Sistemare le stampe togliendo \b
+6b. Misurazione tempo
+7. Scrivere un README.md da cristiani
+8. Stampe più comprensibili per pi
+?. Controlla maiuscole a inizio file nei commenti
+!. Togliere #include <cuda.h> nei .cuh dove non serve
+Stampa bella anche nel c++
+WIDEST_SHORTEST c++
+Makefile c++
+Ricorda!!! Abbiamo tolto $(OBJ)/mrsp.o
+typedef short int bool
+controlla i vari codici delle exit()
