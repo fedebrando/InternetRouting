@@ -14,15 +14,15 @@
 typedef struct
 {
     unsigned int n_nodes;
-    int size;
+    unsigned int size;
     node* nodes;
 } path;
 
 __host__ __device__ path* path_create(unsigned int n_nodes);
 __host__ void path_free(path* p);
-__host__ __device__ int path_in(const path* p, node n);
-__host__ __device__ int path_add(path* p, node i, node j);
-__host__ __device__ int path_equal(const path* p1, const path* p2);
+__host__ __device__ boolean path_in(const path* p, node n);
+__host__ __device__ boolean path_add(path* p, node i, node j);
+__host__ __device__ boolean path_equal(const path* p1, const path* p2);
 __host__ __device__ void path_print(const path* p);
 __host__ path* path_host_to_device(const path* p);
 __host__ path* path_device_to_host(path* p_dev);

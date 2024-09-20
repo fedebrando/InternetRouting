@@ -8,23 +8,9 @@ Riferimenti bibliografici:
 [1] Dynerowicz S., Griffin T. G., On the Forwarding Paths Produced by Internet Routing Algorithms. Seweryn Dynerowicz (University of Namur, Belgium), Timothy G. Griffin. ICNP 2013.
 [2] Griffin T. J., Lecture Notes, Algebraic Path Problems with applications to Internet Routing, Computer Laboratory, University of Cambridge, 2013.
 
-// TODO
-(1.) fare stampa bella delle matrici
-(2.)* programma di routing (parsing file dati -> matrice adiacenza)
-(3.) parallelizzazione funzione getPi()
-4. relazione
-5. CUDA
-
-// TODOTODO
-1. node.hpp
-2. CUDA + makefile
-3. leggere file .dat in c
-
-ULTIMO //TODO
+// TODO el mundo
 2. Aggiungere funzioni lettura file per problema con 152 nodi
 3. Aggiustare il Makefile
-4. Sistemare la funzione dei pset che alloca sulla GPU con malloc (non va) -> else: termina prg con error mess
-5. int -> unsigned int
 6. Sistemare le stampe togliendo \b
 6b. Misurazione tempo
 7. Scrivere un README.md da cristiani
@@ -34,6 +20,6 @@ ULTIMO //TODO
 Stampa bella anche nel c++
 WIDEST_SHORTEST c++
 Makefile c++
-Ricorda!!! Abbiamo tolto $(OBJ)/mrsp.o
 typedef short int bool
 controlla i vari codici delle exit()
+

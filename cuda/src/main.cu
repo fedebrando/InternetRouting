@@ -23,11 +23,11 @@ int main(void)
     // Reading file (Initialization)
     n = 5;
     v_info = (node*) malloc(n * sizeof(node));
-    for (int i = 0; i < n; i++)
+    for (unsigned int i = 0; i < n; i++)
         v_info[i] = i;
     
     a = (lex_product*) malloc(n*n * sizeof(lex_product));
-    for (int i = 0; i < n*n; i++)
+    for (unsigned int i = 0; i < n*n; i++)
         a[i] = ZERO;
     /*
     a[idx(0, 1, n)] = {1, 0.5};
@@ -70,7 +70,7 @@ int main(void)
     free(v_info);
     free(a);
     free(d);
-    for (int i = 0; i < n*n; i++)
+    for (unsigned int i = 0; i < n*n; i++)
         pset_free(pi[i]);
     free(pi);
     

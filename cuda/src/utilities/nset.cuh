@@ -21,7 +21,7 @@ typedef struct
 __host__ __device__ unsigned int n_bytes(unsigned int n_nodes);
 __host__ __device__ void nset_clear(nset* s);
 __host__ nset* nset_create(unsigned int n_nodes);
-__host__ __device__ int nset_in(const nset* s, node n);
+__host__ __device__ boolean nset_in(const nset* s, node n);
 __host__ __device__ void nset_print(const nset* s);
 __host__ __device__ void nset_insert(nset* s, node n);
 __host__ __device__ void nset_difference(nset* res, const nset* s1, const nset* s2);

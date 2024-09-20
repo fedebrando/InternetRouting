@@ -10,12 +10,10 @@
 #include "lex_product.cuh"
 
 #define MAX_LINE_LENGTH 1024
-#define MAX_STRING_LENGTH 25
-#define ERR -1
 
-__host__ int get_num_nodes(const char* filename);
+__host__ unsigned int get_num_nodes(const char* filename);
 __host__ int get_num_values(const char* line);
-__host__ int getV(const char* filename, Node* v);
-__host__ int getA(const char* filename, const Node* v, lex_product* a, int n);
+__host__ boolean getV(const char* filename, Node* v);
+__host__ boolean getA(const char* filename, const Node* v, lex_product* a, unsigned int n);
 
 #endif

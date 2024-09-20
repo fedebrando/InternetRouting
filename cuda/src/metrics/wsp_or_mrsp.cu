@@ -23,12 +23,12 @@ __host__ __device__ lex_product times(lex_product c1, lex_product c2)
 #endif
 }
 
-__host__ __device__ int less_eq(lex_product c1, lex_product c2)
+__host__ __device__ boolean less_eq(lex_product c1, lex_product c2)
 {
     return eq(c1, plus(c1, c2));
 }
 
-__host__ __device__ int less(lex_product c1, lex_product c2)
+__host__ __device__ boolean less(lex_product c1, lex_product c2)
 {
     return !eq(c1, c2) && less_eq(c1, c2);
 }

@@ -8,6 +8,7 @@
 
 #include <stdio.h>
 #include <cuda.h>
+#include "utilities.cuh"
 
 typedef struct
 {
@@ -16,6 +17,6 @@ typedef struct
 } lex_product;
 
 __host__ __device__ void lex_product_print(lex_product c);
-__host__ __device__ int eq(lex_product c1, lex_product c2);
+__host__ __device__ boolean eq(lex_product c1, lex_product c2);
 
 #endif

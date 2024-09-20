@@ -22,14 +22,14 @@ __host__ nset* nset_create(unsigned int n_nodes)
     return s;
 }
 
-__host__ __device__ int nset_in(const nset* s, node n)
+__host__ __device__ boolean nset_in(const nset* s, node n)
 {
     return (int)s->flags[n/8] & (int)pow(2, n % 8);
 }
 
 __host__ __device__ void nset_print(const nset* s)
 {
-    int empty = 1;
+    boolean empty = 1;
 
     printf("{");
     for (node n = 0; n < s->n_nodes; n++)

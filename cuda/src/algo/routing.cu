@@ -1,7 +1,7 @@
 
 #include "routing.cuh"
 
-__device__ node find_qk_min(const lex_product* d, const nset* v, nset** s, nset** diff, int i, int n)
+__device__ node find_qk_min(const lex_product* d, const nset* v, nset** s, nset** diff, node i, unsigned int n)
 {
     node qk;
     lex_product qk_min = ZERO;
@@ -21,9 +21,9 @@ __device__ node find_qk_min(const lex_product* d, const nset* v, nset** s, nset*
     return qk;
 }
 
-__global__ void dijkstra(const lex_product* a, lex_product* d, pset** pi, const path* eps, int n, const nset* v, nset** s, nset** diff, path*** paths_app)
+__global__ void dijkstra(boolean* err, const lex_product* a, lex_product* d, pset** pi, const path* eps, unsigned int n, const nset* v, nset** s, nset** diff, path*** paths_app)
 {
-    int i = threadIdx.x;
+    node i = threadIdx.x;
     node qk;
 
     for (node q = 0; q < n; q++)
@@ -43,14 +43,14 @@ __global__ void dijkstra(const lex_product* a, lex_product* d, pset** pi, const 
 
             if (eq(times(d[idx(i, qk, n)], a[idx(qk, j, n)]), d[idx(i, j, n)]))
             {
-                pset_pair_wise_concat(pi[idx(i, j, n)], pi[idx(i, qk, n)], qk, j, paths_app[i]);
+                err[i] = (err[i] == 1 ? 1 : pset_pair_wise_concat(pi[idx(i, j, n)], pi[idx(i, qk, n)], qk, j, paths_app[i]));
             }
             else if (less(times(d[idx(i, qk, n)], a[idx(qk, j, n)]), d[idx(i, j, n)]))
             {
                 d[idx(i, j, n)] = times(d[idx(i, qk, n)], a[idx(qk, j, n)]);
 
                 pset_clear(pi[idx(i, j, n)]);
-                pset_pair_wise_concat(pi[idx(i, j, n)], pi[idx(i, qk, n)], qk, j, paths_app[i]);
+                err[i] = (err[i] == 1 ? 1 : pset_pair_wise_concat(pi[idx(i, j, n)], pi[idx(i, qk, n)], qk, j, paths_app[i]));
             }
         }
     }
@@ -75,7 +75,7 @@ __host__ nset** s_host_to_device(unsigned int n)
 
     s = nset_create(n);
     s_dev_ptr = (nset**) malloc(n * sizeof(nset*));
-    for (int i = 0; i < n; i++)
+    for (node i = 0; i < n; i++)
         s_dev_ptr[i] = nset_host_to_device(s);
     nset_free(s);
     cudaMalloc(&s_dev, n * sizeof(nset*));
@@ -89,7 +89,7 @@ __host__ void s_free_device(unsigned int n, nset** s_dev)
     nset** s_dev_ptr = (nset**) malloc(n * sizeof(nset*));
 
     cudaMemcpy(s_dev_ptr, s_dev, n * sizeof(nset*), cudaMemcpyDeviceToHost);
-    for (int i = 0; i < n; i++)
+    for (node i = 0; i < n; i++)
         nset_free_device(s_dev_ptr[i]);
     cudaFree(s_dev);
     free(s_dev_ptr);
@@ -101,7 +101,7 @@ __host__ nset** diff_host_to_device(unsigned int n)
 
     diff = nset_create(n);
     diff_dev_ptr = (nset**) malloc(n * sizeof(nset*));
-    for (int i = 0; i < n; i++)
+    for (node i = 0; i < n; i++)
         diff_dev_ptr[i] = nset_host_to_device(diff);
     nset_free(diff);
     cudaMalloc(&diff_dev, n * sizeof(nset*));
@@ -115,7 +115,7 @@ __host__ void diff_free_device(unsigned int n, nset** diff_dev)
     nset** diff_dev_ptr = (nset**) malloc(n * sizeof(nset*));
 
     cudaMemcpy(diff_dev_ptr, diff_dev, n * sizeof(nset*), cudaMemcpyDeviceToHost);
-    for (int i = 0; i < n; i++)
+    for (node i = 0; i < n; i++)
         nset_free_device(diff_dev_ptr[i]);
     cudaFree(diff_dev);
     free(diff_dev_ptr);
@@ -126,16 +126,16 @@ __host__ pset** pi_host_to_device(unsigned int n)
     pset **pi, **pi_dev_ptr, **pi_dev;
 
     pi = (pset**) malloc(n*n * sizeof(pset*));
-    for (int i = 0; i < n*n; i++)
+    for (unsigned int i = 0; i < n*n; i++)
         pi[i] = pset_create(n);
     pi_dev_ptr = (pset**) malloc(n*n * sizeof(pset*));
-    for (int i = 0; i < n*n; i++)
+    for (unsigned int i = 0; i < n*n; i++)
         pi_dev_ptr[i] = pset_host_to_device(pi[i]);
     cudaMalloc(&pi_dev, n*n * sizeof(pset*));
     cudaMemcpy(pi_dev, pi_dev_ptr, n*n * sizeof(pset*), cudaMemcpyHostToDevice);
 
     free(pi_dev_ptr);
-    for (int i = 0; i < n*n; i++)
+    for (unsigned int i = 0; i < n*n; i++)
         pset_free(pi[i]);
     free(pi);
 
@@ -149,7 +149,7 @@ __host__ pset** pi_device_to_host(unsigned int n, pset** pi_dev)
     pi_res = (pset**) malloc(n*n * sizeof(pset*));
     pi_dev_ptr = (pset**) malloc(n*n * sizeof(pset*));
     cudaMemcpy(pi_dev_ptr, pi_dev, n*n * sizeof(path*), cudaMemcpyDeviceToHost);
-    for (int i = 0; i < n*n; i++)
+    for (unsigned int i = 0; i < n*n; i++)
         pi_res[i] = pset_device_to_host(pi_dev_ptr[i]);
 
     free(pi_dev_ptr);
@@ -163,7 +163,7 @@ __host__ path** paths_app_host_to_device(unsigned int n)
     path** paths_app_dev_ptr = (path**) malloc(n * sizeof(path*));
     path** paths_app_dev;
 
-    for (int i = 0; i < n; i++)
+    for (node i = 0; i < n; i++)
         paths_app_dev_ptr[i] = path_host_to_device(p);
     cudaMalloc(&paths_app_dev, n * sizeof(path*));
     cudaMemcpy(paths_app_dev, paths_app_dev_ptr, n * sizeof(path*), cudaMemcpyHostToDevice);
@@ -179,7 +179,7 @@ __host__ void paths_app_free_device(unsigned int n, path** paths_app_dev)
     path** paths_app_dev_ptr = (path**) malloc(n * sizeof(path*));
 
     cudaMemcpy(paths_app_dev_ptr, paths_app_dev, n * sizeof(path*), cudaMemcpyDeviceToHost);
-    for (int i = 0; i < n; i++)
+    for (node i = 0; i < n; i++)
         path_free_device(paths_app_dev_ptr[i]);
     cudaFree(paths_app_dev);
 
@@ -191,7 +191,7 @@ __host__ path*** multi_paths_app_host_to_device(unsigned int n)
     path*** mpa_dev;
     path*** mpa_dev_ptr = (path***) malloc(n * sizeof(path**));
 
-    for (int i = 0; i < n; i++)
+    for (node i = 0; i < n; i++)
         mpa_dev_ptr[i] = paths_app_host_to_device(n);
     cudaMalloc(&mpa_dev, n * sizeof(path**));
     cudaMemcpy(mpa_dev, mpa_dev_ptr, n * sizeof(path**), cudaMemcpyHostToDevice);
@@ -206,18 +206,35 @@ __host__ void multi_paths_app_free_device(unsigned int n, path*** mpa_dev)
     path*** mpa_dev_ptr = (path***) (malloc(n * sizeof(path**)));
 
     cudaMemcpy(mpa_dev_ptr, mpa_dev, n * sizeof(path**), cudaMemcpyDeviceToHost);
-    for (int i = 0; i < n; i++)
+    for (node i = 0; i < n; i++)
         paths_app_free_device(n, mpa_dev_ptr[i]);
     cudaFree(mpa_dev);
 
     free(mpa_dev_ptr);
 }
 
+__host__ boolean* err_host_to_device(unsigned int n)
+{
+    boolean* err_dev;
+
+    cudaMalloc(&err_dev, n * sizeof(boolean));
+    cudaMemset(err_dev, 0, n * sizeof(boolean));
+    return err_dev;
+}
+
+__host__ boolean check_error(unsigned int n, const boolean* err)
+{
+    for (node i = 0; i < n; i++)
+        if (err[i])
+            return 1;
+    return 0;
+}
+
 __host__ __device__ void d_print(unsigned int n, const lex_product* d)
 {
-    for (int i = 0; i < n; i++)
+    for (node i = 0; i < n; i++)
     {
-        for (int j = 0; j < n; j++)
+        for (node j = 0; j < n; j++)
         {
             lex_product_print(d[idx(i, j, n)]);
             printf(" ");
@@ -228,9 +245,9 @@ __host__ __device__ void d_print(unsigned int n, const lex_product* d)
 
 __host__ __device__ void pi_print(unsigned int n, pset** pi)
 {
-    for (int i = 0; i < n; i++)
+    for (node i = 0; i < n; i++)
     {
-        for (int j = 0; j < n; j++)
+        for (node j = 0; j < n; j++)
         {
             pset_print(pi[idx(i, j, n)]);
             printf(" ");
@@ -246,8 +263,10 @@ __host__ void compute_routing(unsigned int n, const lex_product* a, lex_product*
     nset **s_dev, **diff_dev;
     pset** pi_dev;
     path *eps, *eps_dev, ***paths_app_dev;
+    boolean *err_dev, *err;
 
     // Host -> Device
+    err_dev = err_host_to_device(n);
     cudaMalloc(&a_dev, n*n * sizeof(lex_product)); // a_dev
     cudaMemcpy(a_dev, a, n*n * sizeof(lex_product), cudaMemcpyHostToDevice);
     v_dev = v_host_to_device(n); // v_dev
@@ -260,8 +279,16 @@ __host__ void compute_routing(unsigned int n, const lex_product* a, lex_product*
     paths_app_dev = multi_paths_app_host_to_device(n);
 
     // Parallel Computing
-    dijkstra<<<1, n>>>(a_dev, d_dev, pi_dev, eps_dev, n, v_dev, s_dev, diff_dev, paths_app_dev);
-    cudaDeviceSynchronize();
+    dijkstra<<<1, n>>>(err_dev, a_dev, d_dev, pi_dev, eps_dev, n, v_dev, s_dev, diff_dev, paths_app_dev);
+    
+    // Device -> Host (Check Error)
+    err = (boolean*) malloc(n * sizeof(boolean));
+    cudaMemcpy(err, err_dev, n * sizeof(boolean), cudaMemcpyDeviceToHost);
+    if (check_error(n, err))
+    {
+        fprintf(stderr, "Error: maximum number of optimal paths reached (%d), increase the value of the PROB_MAX_OPT_PATHS hyperparameter\n", PROB_MAX_OPT_PATHS);
+        exit(1);
+    }
 
     // Device -> Host (Results)
     *d = (lex_product*) malloc(n*n * sizeof(lex_product));
@@ -269,6 +296,8 @@ __host__ void compute_routing(unsigned int n, const lex_product* a, lex_product*
     *pi = pi_device_to_host(n, pi_dev); // pi
 
     // Free
+    cudaFree(err_dev);
+    free(err);
     path_free(eps);
     nset_free_device(v_dev);
     cudaFree(a_dev);

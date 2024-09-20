@@ -1,21 +1,19 @@
 
 #include "reading_data.cuh"
 
-__host__ int get_num_nodes(const char* filename)
+__host__ unsigned int get_num_nodes(const char* filename)
 {
     FILE* file = fopen(filename, "r");
-    int n_nodes = 0;
+    unsigned int n_nodes = 0;
     char line[MAX_LINE_LENGTH];
 
-    if (!file) 
+    if (file) 
     {
-        perror("Error in opening file!");
-        return ERR;
+        fgets(line, sizeof(line), file);
+        while(fgets(line, sizeof(line), file))
+            n_nodes++;
+        fclose(file);
     }
-    fgets(line, sizeof(line), file);
-    while(fgets(line, sizeof(line), file))
-        n_nodes++;
-    fclose(file);
     return n_nodes;
 }
 
@@ -33,7 +31,7 @@ __host__ int get_num_values(const char* line)
     return count;
 }
 
-__host__ int getV(const char* filename, Node* v)
+__host__ boolean getV(const char* filename, Node* v)
 {
     FILE* file = fopen(filename, "r");
     int n_values;
@@ -41,10 +39,7 @@ __host__ int getV(const char* filename, Node* v)
     char line[MAX_LINE_LENGTH];
 
     if (!file) 
-    {
-        perror("Error in opening file!");
-        return ERR;
-    }
+        return 0;
     fgets(line, sizeof(line), file); //skip first line
     n_values = get_num_values(line);
     values = (char **) malloc(sizeof(char*) * n_values);
@@ -60,16 +55,16 @@ __host__ int getV(const char* filename, Node* v)
         v[atoi(values[0])].longitude = atof(values[4]);
     }
     fclose(file);
-    return 0;
+    return 1;
 }
 
-__host__ int getA(const char* filename, const Node* v, lex_product* a, int n)
+__host__ boolean getA(const char* filename, const Node* v, lex_product* a, unsigned int n)
 {
     FILE *file = fopen(filename, "r");
     int n_values;
     char** values;
     char line[MAX_LINE_LENGTH];
-    int first, second;
+    unsigned int first, second;
     double distance;
 #ifdef SHORTEST_WIDEST
     double bandwidth;
@@ -78,10 +73,7 @@ __host__ int getA(const char* filename, const Node* v, lex_product* a, int n)
 #endif
 
     if (!file) 
-    {
-        perror("Error in opening file!");
-        return ERR;
-    }
+        return 0;
     fgets(line, sizeof(line), file);
     n_values = get_num_values(line);
     values = (char **) malloc(sizeof(char*) * n_values);
@@ -104,5 +96,5 @@ __host__ int getA(const char* filename, const Node* v, lex_product* a, int n)
 #endif
     }
     fclose(file);
-    return 0;
+    return 1;
 }

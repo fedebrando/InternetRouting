@@ -17,15 +17,15 @@ __host__ void path_free(path* p)
     free(p);
 }
 
-__host__ __device__ int path_in(const path* p, node n)
+__host__ __device__ boolean path_in(const path* p, node n)
 {
-    for (int i = 0; i < p->size; i++)
+    for (node i = 0; i < p->size; i++)
         if (p->nodes[i] == n)
             return 1;
     return 0;
 }
 
-__host__ __device__ int path_add(path* p, node i, node j)
+__host__ __device__ boolean path_add(path* p, node i, node j)
 {
     if (p->size)
     {
@@ -45,11 +45,11 @@ __host__ __device__ int path_add(path* p, node i, node j)
     return 1;
 }
 
-__host__ __device__ int path_equal(const path* p1, const path* p2)
+__host__ __device__ boolean path_equal(const path* p1, const path* p2)
 {
     if (p1->size != p2->size)
         return 0;
-    for (int i = 0; i < p1->size; i++)
+    for (node i = 0; i < p1->size; i++)
         if (p1->nodes[i] != p2->nodes[i])
             return 0;
     return 1;
@@ -60,7 +60,7 @@ __host__ __device__ void path_print(const path* p)
     if (p->size)
     {
         printf("(");
-        for (int i = 0; i < p->size; i++)
+        for (node i = 0; i < p->size; i++)
             printf("%d, ", p->nodes[i]);
         printf("\b\b)");
     }
