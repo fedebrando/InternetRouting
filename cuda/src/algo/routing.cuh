@@ -1,6 +1,6 @@
 
 /*
- * Routing algorithm
+ * Routing Algorithm
 */
 
 #ifndef ROUTING 

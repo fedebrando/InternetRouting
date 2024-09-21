@@ -29,19 +29,16 @@ __host__ __device__ boolean nset_in(const nset* s, node n)
 
 __host__ __device__ void nset_print(const nset* s)
 {
-    boolean empty = 1;
-
     printf("{");
     for (node n = 0; n < s->n_nodes; n++)
         if (nset_in(s, n))
         {
-            printf("%d, ", n);
-            if (empty)
-                empty = 0;
+            if (n == s->n_nodes - 1)
+                printf("%d", n);
+            else
+                printf("%d, ", n);
         }
-    if (!empty)
-        printf("\b\b");
-    printf("}\n");
+    printf("}");
 }
 
 __host__ __device__ void nset_insert(nset* s, node n)

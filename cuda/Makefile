@@ -1,7 +1,7 @@
 
 CC = nvcc
-ARCH = -arch=sm_75#a100
-# ARCH = -arch=compute_60 #p100
+#ARCH = -arch=sm_75#a100
+ARCH = -arch=compute_60#p100
 RDC = -rdc=true
 CUDA = -lcudadevrt
 SRC = src
@@ -58,7 +58,7 @@ $(OBJ)/nset.o: $(UTILITIES)/nset.cu $(UTILITIES)/nset.cuh $(UTILITIES)/utilities
 $(OBJ)/utilities.o: $(UTILITIES)/utilities.cu $(UTILITIES)/utilities.cuh
 	$(CC) $(ARCH) $(OTHER) -dc $< -o $@
 
-$(OBJ)/reading_data.o: $(R_DATA)/reading_data.cu $(R_DATA)/reading_data.cuh $(METRICS)/lex_product.cuh $(UTILITIES)/utilities.cuh $(R_DATA)/node.cuh 
+$(OBJ)/reading_data.o: $(R_DATA)/reading_data.cu $(R_DATA)/reading_data.cuh $(METRICS)/lex_product.cuh $(METRICS)/metric_hyperparams.h $(UTILITIES)/utilities.cuh $(R_DATA)/node.cuh 
 	$(CC) $(ARCH) $(OTHER) -dc $< -o $@
 
 $(OBJ)/node.o: $(R_DATA)/node.cu $(R_DATA)/node.cuh

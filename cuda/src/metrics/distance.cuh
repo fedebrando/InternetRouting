@@ -1,6 +1,6 @@
 
 /*
- * Shortest path
+ * Shortest Path
 */
 
 #ifndef DISTANCE

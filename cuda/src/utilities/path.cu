@@ -61,8 +61,12 @@ __host__ __device__ void path_print(const path* p)
     {
         printf("(");
         for (node i = 0; i < p->size; i++)
-            printf("%d, ", p->nodes[i]);
-        printf("\b\b)");
+        {
+            if (i == p->size - 1)
+                printf("%d)", p->nodes[i]);
+            else
+                printf("%d, ", p->nodes[i]);
+        }
     }
     else
         printf("ε");

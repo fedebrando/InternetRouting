@@ -1,6 +1,6 @@
 
 /*
- * Most reliable path
+ * Most Reliable Path
 */
 
 #ifndef RELIABILITY 

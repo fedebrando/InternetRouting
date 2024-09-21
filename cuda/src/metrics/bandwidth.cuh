@@ -1,6 +1,6 @@
 
 /*
- * Widest path
+ * Widest Path
 */
 
 #ifndef BANDWIDTH 

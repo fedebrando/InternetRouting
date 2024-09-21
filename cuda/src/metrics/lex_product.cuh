@@ -1,13 +1,12 @@
 
 /*
- * Lexicographic product of two basic metrics
+ * Lexicographic Product of two basic metrics
 */
 
 #ifndef LEX_PRODUCT 
 #define LEX_PRODUCT
 
 #include <stdio.h>
-#include <cuda.h>
 #include "utilities.cuh"
 
 typedef struct

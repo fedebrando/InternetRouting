@@ -9,17 +9,16 @@ Riferimenti bibliografici:
 [2] Griffin T. J., Lecture Notes, Algebraic Path Problems with applications to Internet Routing, Computer Laboratory, University of Cambridge, 2013.
 
 // TODO el mundo
+1. aggiustare algoritmo per nodi non connessi
 2. Aggiungere funzioni lettura file per problema con 152 nodi
 3. Aggiustare il Makefile
-6. Sistemare le stampe togliendo \b
-6b. Misurazione tempo
+6. Misurazione tempo
 7. Scrivere un README.md da cristiani
 8. Stampe più comprensibili per pi
-?. Controlla maiuscole a inizio file nei commenti
-!. Togliere #include <cuda.h> nei .cuh dove non serve
+
 Stampa bella anche nel c++
 WIDEST_SHORTEST c++
 Makefile c++
-typedef short int bool
 controlla i vari codici delle exit()
+
 

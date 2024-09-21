@@ -6,6 +6,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include "utilities.cuh"
+#include "metric_hyperparams.h"
 #include "node.cuh"
 #include "lex_product.cuh"
 

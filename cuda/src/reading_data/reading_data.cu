@@ -66,7 +66,7 @@ __host__ boolean getA(const char* filename, const Node* v, lex_product* a, unsig
     char line[MAX_LINE_LENGTH];
     unsigned int first, second;
     double distance;
-#ifdef SHORTEST_WIDEST
+#ifdef WSP
     double bandwidth;
 #else
     double reliability;
@@ -85,12 +85,13 @@ __host__ boolean getA(const char* filename, const Node* v, lex_product* a, unsig
         first = atoi(values[0]);
         second = atoi(values[1]);
         distance = haversine(v[first], v[second]);
-#ifdef SHORTEST_WIDEST
+#ifdef WSP
         bandwidth = atof(values[3]);
         a[idx(first, second, n)] = (lex_product) {distance, bandwidth};
         a[idx(second, first, n)] = (lex_product) {distance, bandwidth};
 #else
         reliability = atof(values[2]);
+
         a[idx(first, second, n)] = (lex_product) {distance, reliability};
         a[idx(second, first, n)] = (lex_product) {distance, reliability};
 #endif

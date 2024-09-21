@@ -1,7 +1,7 @@
 
 #include "pset.cuh"
 
-__host__ __device__ pset* pset_create(unsigned int n_nodes)
+__host__ pset* pset_create(unsigned int n_nodes)
 {
     pset* s = (pset*) malloc(sizeof(pset));
 
@@ -35,14 +35,14 @@ __host__ __device__ boolean pset_in(const pset* s, const path* p)
     return 0;
 }
 
-__device__ void path_cpy(path* des, const path* src)
+__host__ __device__ void path_cpy(path* des, const path* src)
 {
     des->n_nodes = src->n_nodes;
     des->size = src->size;
     memcpy(des->nodes, src->nodes, src->n_nodes * sizeof(node));
 }
 
-__device__ short boolean pset_insert(pset* s, const path* p)
+__host__ __device__ boolean pset_insert(pset* s, const path* p)
 {
     if (pset_in(s, p))
         return 0;
@@ -67,7 +67,7 @@ __host__ __device__ void pset_print(const pset* s)
     printf("}");
 }
 
-__device__ short boolean pset_pair_wise_concat(pset* res, const pset* s, node i, node j, path** paths_app)
+__host__ __device__ boolean pset_pair_wise_concat(pset* res, const pset* s, node i, node j, path** paths_app)
 {
     for (node p = 0; p < s->size; p++)
     {
