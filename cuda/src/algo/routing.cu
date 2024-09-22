@@ -41,10 +41,8 @@ __global__ void dijkstra(boolean* err, const lex_product* a, lex_product* d, pse
             if (!nset_in(diff[i], j))
                 continue;
 
-            if (eq(times(d[idx(i, qk, n)], a[idx(qk, j, n)]), d[idx(i, j, n)]))
-            {
+            if (eq(times(d[idx(i, qk, n)], a[idx(qk, j, n)]), d[idx(i, j, n)]) && !eq(d[idx(i, j, n)], ZERO))
                 err[i] = (err[i] == 1 ? 1 : pset_pair_wise_concat(pi[idx(i, j, n)], pi[idx(i, qk, n)], qk, j, paths_app[i]));
-            }
             else if (less(times(d[idx(i, qk, n)], a[idx(qk, j, n)]), d[idx(i, j, n)]))
             {
                 d[idx(i, j, n)] = times(d[idx(i, qk, n)], a[idx(qk, j, n)]);

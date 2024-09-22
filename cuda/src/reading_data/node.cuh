@@ -20,8 +20,8 @@ typedef struct
     double longitude;
 } Node;
 
-__host__ void Node_print(Node n);
+__host__ void Node_print(const Node* n);
 __host__ double to_radians(double degree);
-__host__ double haversine(Node n1, Node n2);
+__host__ double haversine(const Node* n1, const Node* n2);
 
 #endif

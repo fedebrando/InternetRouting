@@ -9,6 +9,7 @@
 #include "metric_hyperparams.h"
 #include "node.cuh"
 #include "lex_product.cuh"
+#include "wsp_or_mrsp.cuh"
 
 #define MAX_LINE_LENGTH 1024
 

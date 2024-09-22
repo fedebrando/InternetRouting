@@ -74,6 +74,8 @@ __host__ boolean getA(const char* filename, const Node* v, lex_product* a, unsig
 
     if (!file) 
         return 0;
+    for (unsigned int i = 0; i < n*n; i++)
+        a[i] = ZERO;
     fgets(line, sizeof(line), file);
     n_values = get_num_values(line);
     values = (char **) malloc(sizeof(char*) * n_values);
@@ -84,7 +86,7 @@ __host__ boolean getA(const char* filename, const Node* v, lex_product* a, unsig
     {
         first = atoi(values[0]);
         second = atoi(values[1]);
-        distance = haversine(v[first], v[second]);
+        distance = haversine(v + first, v + second);
 #ifdef WSP
         bandwidth = atof(values[3]);
         a[idx(first, second, n)] = (lex_product) {distance, bandwidth};
