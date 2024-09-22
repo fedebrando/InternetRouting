@@ -148,4 +148,12 @@ class Routing
         ~Routing() = default;
 };
 
+template<Semiring E, Print T>
+void print_results(ostream& os, const vector<vector<E>>& d, const vector<vector<set<Path<T>>>>& pi, const vector<T>& v)
+{
+    for (unsigned int i = 0; i < d.size(); i++)
+        for (unsigned int j = 0; j < d.size(); j++)
+            os << v[i] << " -> " << v[j] << " (" << d[i][j] << "): " << pi[i][j] << endl;
+}
+
 #endif

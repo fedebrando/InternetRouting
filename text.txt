@@ -12,7 +12,3 @@ Riferimenti bibliografici:
 1. (find_qk_min leggermente meglio, facoltativo)
 7. Scrivere un README.md da cristiani
 8. Stampe più comprensibili per pi
-
-Stampa bella anche nel c++
-
-
