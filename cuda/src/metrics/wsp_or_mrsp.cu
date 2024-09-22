@@ -32,3 +32,16 @@ __host__ __device__ boolean less(lex_product c1, lex_product c2)
 {
     return !eq(c1, c2) && less_eq(c1, c2);
 }
+
+__host__ __device__ void lex_product_print(lex_product c)
+{
+    printf("(");
+    distance_print(c.fst);
+    printf(", ");
+#ifdef WSP
+    bandwidth_print(c.snd);
+#else
+    reliability_print(c.snd);
+#endif
+    printf(")");
+}

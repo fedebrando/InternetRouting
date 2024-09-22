@@ -7,7 +7,7 @@ __host__ pset* pset_create(size_t n_nodes)
 
     s->n_nodes = n_nodes;
     s->size = 0;
-    s->m_size = PROB_MAX_OPT_PATHS;
+    s->m_size = MAX_OPT_PATHS;
     s->paths = (path**) malloc(s->m_size * sizeof(path*));
     for (size_t i = 0; i < s->m_size; i++)
         s->paths[i] = path_create(n_nodes);

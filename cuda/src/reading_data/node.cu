@@ -37,9 +37,9 @@ void print_results(const lex_product* d, pset** pi, const Node* v_info, size_t n
             Node_print(v_info + i);
             printf(" -> ");
             Node_print(v_info + j);
-            printf(" (");
+            printf(" ");
             lex_product_print(d[idx(i, j, n)]);
-            printf("): ");
+            printf(": ");
             pset_v_info_print(pi[idx(i, j, n)], v_info);
             printf("\n");
         }

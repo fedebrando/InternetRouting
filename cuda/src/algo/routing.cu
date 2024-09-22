@@ -296,7 +296,7 @@ __host__ void compute_routing(size_t n, const lex_product* a, lex_product** d, p
     cudaMemcpy(err, err_dev, n * sizeof(boolean), cudaMemcpyDeviceToHost);
     if (check_error(n, err))
     {
-        fprintf(stderr, "Error: maximum number of optimal paths reached (%d), increase the value of the PROB_MAX_OPT_PATHS hyperparameter\n", PROB_MAX_OPT_PATHS);
+        fprintf(stderr, "Error: maximum number of optimal paths reached (%d), increase the value of the MAX_OPT_PATHS hyperparameter\n", MAX_OPT_PATHS);
         exit(1);
     }
 

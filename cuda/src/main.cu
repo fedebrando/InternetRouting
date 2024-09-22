@@ -46,15 +46,14 @@ int main(void)
     // Parallel Routing Algorithm
     compute_routing(n, a, &d, &pi);
     
-    /*
-    // Results printing
-    printf("--- D MATRIX ---\n");
-    d_print(n, d);
-
-    printf("\n--- PI MATRIX ---\n");
-    pi_print(n, pi);
-    */
-
+    // Printing results
+    printf("Routing Table for ");
+#ifdef WSP 
+    printf("Widest Shortest Path");
+#else
+    printf("Most Reliable Shortest Path");
+#endif
+    printf("\n\n");
     print_results(d, pi, v_info, n);
 
     // Free

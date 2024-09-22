@@ -8,6 +8,7 @@
 
 #include <stdio.h>
 #include <math.h>
+#include "wsp_or_mrsp.cuh"
 #include "lex_product.cuh"
 #include "path.cuh"
 #include "pset.cuh"

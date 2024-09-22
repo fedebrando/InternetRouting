@@ -20,3 +20,8 @@ __host__ __device__ boolean bandwidth_less(double bw1, double bw2)
 {
     return bw1 != bw2 && bandwidth_less_eq(bw1, bw2);
 }
+
+__host__ __device__ void bandwidth_print(double bw)
+{
+    printf("%lf Mbps", bw);
+}

@@ -12,7 +12,7 @@
 #include "path.cuh"
 
 // hyperparam to size the maximum expected optimal paths number
-#define PROB_MAX_OPT_PATHS 5
+#define MAX_OPT_PATHS 5
 
 typedef struct
 {

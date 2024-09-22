@@ -25,10 +25,10 @@ create_dirs:
 $(BIN)/main: $(OBJ)/main.o $(OBJ)/nset.o $(OBJ)/path.o $(OBJ)/pset.o $(OBJ)/lex_product.o $(OBJ)/distance.o $(OBJ)/bandwidth.o $(OBJ)/reliability.o $(OBJ)/wsp_or_mrsp.o $(OBJ)/routing.o $(OBJ)/utilities.o $(OBJ)/reading_data.o $(OBJ)/node.o
 	$(CC) $(ARCH) $(RDC) $^ -o $@ $(CUDA)
 
-$(OBJ)/main.o: $(SRC)/main.cu $(UTILITIES)/nset.cuh $(UTILITIES)/path.cuh $(UTILITIES)/pset.cuh $(METRICS)/lex_product.cuh $(METRICS)/wsp_or_mrsp.cuh $(UTILITIES)/utilities.cuh $(R_DATA)/reading_data.cuh $(R_DATA)/node.cuh
+$(OBJ)/main.o: $(SRC)/main.cu $(UTILITIES)/nset.cuh $(UTILITIES)/path.cuh $(UTILITIES)/pset.cuh $(METRICS)/lex_product.cuh $(METRICS)/wsp_or_mrsp.cuh $(UTILITIES)/utilities.cuh $(R_DATA)/reading_data.cuh $(R_DATA)/node.cuh $(METRICS)/metric_hyperparams.h
 	$(CC) $(ARCH) $(OTHER) -dc $< -o $@
 
-$(OBJ)/routing.o: $(ALGO)/routing.cu $(ALGO)/routing.cuh $(UTILITIES)/utilities.cuh $(UTILITIES)/nset.cuh $(UTILITIES)/path.cuh $(UTILITIES)/pset.cuh $(METRICS)/lex_product.cuh $(METRICS)/wsp_or_mrsp.cuh
+$(OBJ)/routing.o: $(ALGO)/routing.cu $(ALGO)/routing.cuh $(UTILITIES)/utilities.cuh $(UTILITIES)/nset.cuh $(UTILITIES)/path.cuh $(UTILITIES)/pset.cuh $(METRICS)/lex_product.cuh $(METRICS)/wsp_or_mrsp.cuh $(METRICS)/metric_hyperparams.h
 	$(CC) $(ARCH) $(OTHER) -dc $< -o $@
 
 $(OBJ)/wsp_or_mrsp.o: $(METRICS)/wsp_or_mrsp.cu $(METRICS)/wsp_or_mrsp.cuh $(METRICS)/lex_product.cuh $(METRICS)/distance.cuh $(METRICS)/bandwidth.cuh $(METRICS)/reliability.cuh $(METRICS)/metric_hyperparams.h $(UTILITIES)/utilities.cuh
@@ -61,7 +61,7 @@ $(OBJ)/utilities.o: $(UTILITIES)/utilities.cu $(UTILITIES)/utilities.cuh
 $(OBJ)/reading_data.o: $(R_DATA)/reading_data.cu $(R_DATA)/reading_data.cuh $(METRICS)/lex_product.cuh $(METRICS)/metric_hyperparams.h $(METRICS)/wsp_or_mrsp.cuh $(UTILITIES)/utilities.cuh $(R_DATA)/node.cuh 
 	$(CC) $(ARCH) $(OTHER) -dc $< -o $@
 
-$(OBJ)/node.o: $(R_DATA)/node.cu $(R_DATA)/node.cuh $(METRICS)/lex_product.cuh $(UTILITIES)/path.cuh $(UTILITIES)/pset.cuh
+$(OBJ)/node.o: $(R_DATA)/node.cu $(R_DATA)/node.cuh $(METRICS)/wsp_or_mrsp.cuh $(METRICS)/metric_hyperparams.h $(METRICS)/lex_product.cuh $(UTILITIES)/path.cuh $(UTILITIES)/pset.cuh
 	$(CC) $(ARCH) $(OTHER) -dc $< -o $@
 
 clean:

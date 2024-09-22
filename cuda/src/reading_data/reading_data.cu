@@ -93,7 +93,6 @@ __host__ boolean getA(const char* filename, const Node* v, lex_product* a, size_
         a[idx(second, first, n)] = (lex_product) {distance, bandwidth};
 #else
         reliability = atof(values[2]);
-
         a[idx(first, second, n)] = (lex_product) {distance, reliability};
         a[idx(second, first, n)] = (lex_product) {distance, reliability};
 #endif
