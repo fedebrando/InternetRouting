@@ -42,7 +42,7 @@ $(OBJ)/utilities.o: $(UTILITIES)/utilities.cpp $(UTILITIES)/utilities.hpp
 $(OBJ)/node.o: $(UTILITIES)/node.cpp $(UTILITIES)/node.hpp
 	$(CC) $(OMP) $(STD) $(OTHER) -c -o $@ $<
 
-$(OBJ)/reading_data.o: $(R_DATA)/reading_data.cpp $(R_DATA)/reading_data.hpp $(UTILITIES)/node.hpp $(METRICS)/metrics.hpp $(METRICS)/metric_hyperparams.h $(SEMIRING)/lex_product.hpp $(ALGO)/settings.h
+$(OBJ)/reading_data.o: $(R_DATA)/reading_data.cpp $(R_DATA)/reading_data.hpp $(UTILITIES)/node.hpp $(METRICS)/metrics.hpp $(METRICS)/metric_hyperparams.h $(SEMIRING)/lex_product.hpp
 	$(CC) $(OMP) $(STD) $(OTHER) -c -o $@ $<
 
 clean:

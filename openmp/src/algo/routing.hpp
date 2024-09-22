@@ -102,8 +102,6 @@ class Routing
         {
             vector<node> v_vec(v.begin(), v.end());
 
-            omp_set_nested(1);
-
             #pragma omp parallel for schedule(static)
             for (node j = 0; j < v_vec.size(); j++)
             {

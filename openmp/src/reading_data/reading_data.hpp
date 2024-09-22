@@ -8,7 +8,6 @@
 #include "node.hpp"
 #include "metrics.hpp"
 #include "lex_product.hpp"
-#include "settings.h"
 #include "metric_hyperparams.h"
 
 using namespace std;
