@@ -25,7 +25,7 @@ create_dirs:
 $(BIN)/main: $(OBJ)/main.o $(OBJ)/nset.o $(OBJ)/path.o $(OBJ)/pset.o $(OBJ)/lex_product.o $(OBJ)/distance.o $(OBJ)/bandwidth.o $(OBJ)/reliability.o $(OBJ)/wsp_or_mrsp.o $(OBJ)/routing.o $(OBJ)/utilities.o $(OBJ)/reading_data.o $(OBJ)/node.o
 	$(CC) $(ARCH) $(RDC) $^ -o $@ $(CUDA)
 
-$(OBJ)/main.o: $(SRC)/main.cu $(UTILITIES)/nset.cuh $(UTILITIES)/path.cuh $(UTILITIES)/pset.cuh $(METRICS)/lex_product.cuh $(METRICS)/wsp_or_mrsp.cuh $(UTILITIES)/utilities.cuh $(R_DATA)/reading_data.cuh $(R_DATA)/node.cuh $(METRICS)/metric_hyperparams.h
+$(OBJ)/main.o: $(SRC)/main.cu $(UTILITIES)/nset.cuh $(UTILITIES)/path.cuh $(UTILITIES)/pset.cuh $(METRICS)/lex_product.cuh $(METRICS)/wsp_or_mrsp.cuh $(UTILITIES)/utilities.cuh $(R_DATA)/reading_data.cuh $(R_DATA)/node.cuh $(METRICS)/metric_hyperparams.h $(ALGO)/routing.cuh
 	$(CC) $(ARCH) $(OTHER) -dc $< -o $@
 
 $(OBJ)/routing.o: $(ALGO)/routing.cu $(ALGO)/routing.cuh $(UTILITIES)/utilities.cuh $(UTILITIES)/nset.cuh $(UTILITIES)/path.cuh $(UTILITIES)/pset.cuh $(METRICS)/lex_product.cuh $(METRICS)/wsp_or_mrsp.cuh $(METRICS)/metric_hyperparams.h
