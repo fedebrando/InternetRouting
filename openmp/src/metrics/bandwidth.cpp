@@ -56,6 +56,6 @@ bool Bandwidth::operator == (const Bandwidth& other) const
 
 ostream& operator << (ostream& os, const Bandwidth& bandw)
 {
-    os << bandw.getBw();
+    os << bandw.getBw() << " Mbps";
     return os;
 }

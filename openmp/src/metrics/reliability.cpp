@@ -56,6 +56,6 @@ bool Reliability::operator == (const Reliability& other) const
 
 ostream& operator << (ostream& os, const Reliability& rel)
 {
-    os << rel.getR();
+    os << rel.getR() * 100 << " %";
     return os;
 }

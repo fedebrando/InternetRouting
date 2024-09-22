@@ -56,6 +56,6 @@ bool Distance::operator == (const Distance& other) const
 
 ostream& operator << (ostream& os, const Distance& dis)
 {
-    os << dis.getD();
+    os << dis.getD() << " km";
     return os;
 }

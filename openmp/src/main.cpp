@@ -49,14 +49,14 @@ int main(void)
     cout << "Elapsed time: " << durata_ms.count() << " ms" << endl << endl;
 #endif
     
-    /*
-    cout << "--- D MATRIX ---" << endl;
-    cout << r.getD() << endl << endl;
-    cout << "--- PI MATRIX ---" << endl;
-    cout << r.getPi() << endl;
-
-    */
-
+    // Printing results
+    cout << "Routing Table for ";
+#ifdef WSP
+    cout << "Widest Shortest Path";
+#else
+    cout << "Most Reliable Shortest Path";
+#endif
+    cout << endl << endl;
     print_results(cout, r.getD(), r.getPi(), v);
 
     return 0; 
