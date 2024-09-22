@@ -11,4 +11,5 @@ Riferimenti bibliografici:
 // TODO el mundo
 1. (find_qk_min leggermente meglio, facoltativo)
 7. Scrivere un README.md da cristiani
-8. Stampe più comprensibili per pi
+
+size_t c

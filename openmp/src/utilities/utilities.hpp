@@ -15,7 +15,7 @@
 
 using namespace std;
 
-typedef unsigned int node;
+typedef size_t node;
 
 template<typename T>
 concept Order = requires(T a, T b)

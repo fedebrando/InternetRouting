@@ -18,8 +18,8 @@ vector<Node> getV(string filename)
     vector<string> values;
     string line; 
     vector<Node> v;
-    int first;
-    int second;
+    size_t first;
+    size_t second;
 
     inputFile.open(filename);
     if (!inputFile) 
@@ -40,8 +40,8 @@ void getA(string filename, const vector<Node>& v, vector<vector<LexProduct<Dista
     ifstream inputFile;  
     vector<string> values;
     string line; 
-    int first;
-    int second;
+    size_t first;
+    size_t second;
     LexProduct<Distance, Bandwidth> lp;
 
     inputFile.open(filename);
@@ -65,8 +65,8 @@ void getA(string filename, const vector<Node>& v, vector<vector<LexProduct<Dista
     ifstream inputFile;  
     vector<string> values;
     string line; 
-    int first;
-    int second;
+    size_t first;
+    size_t second;
     LexProduct<Distance, Reliability> lp;
 
     inputFile.open(filename);

@@ -57,7 +57,7 @@ class Routing
             pi[i][i].insert(Path<node>::eps);
 
             // dijkstra algorithm
-            for (int k = 1; k <= v.size(); k++)
+            for (size_t k = 1; k <= v.size(); k++)
             {
                 qk = find_qk_min(i, s);
                 s.insert(qk);
@@ -105,7 +105,7 @@ class Routing
             omp_set_nested(1);
 
             #pragma omp parallel for schedule(static)
-            for (int j = 0; j < v_vec.size(); j++)
+            for (node j = 0; j < v_vec.size(); j++)
             {
 #ifdef VERBOSE
                 ostringstream os;
@@ -151,8 +151,8 @@ class Routing
 template<Semiring E, Print T>
 void print_results(ostream& os, const vector<vector<E>>& d, const vector<vector<set<Path<T>>>>& pi, const vector<T>& v)
 {
-    for (unsigned int i = 0; i < d.size(); i++)
-        for (unsigned int j = 0; j < d.size(); j++)
+    for (node i = 0; i < d.size(); i++)
+        for (node j = 0; j < d.size(); j++)
             os << v[i] << " -> " << v[j] << " (" << d[i][j] << "): " << pi[i][j] << endl;
 }
 
