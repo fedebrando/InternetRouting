@@ -1,6 +1,6 @@
 
-#ifndef METRICS_HYPERPARAM
-#define METRICS_HYPERPARAM
+#ifndef METRIC_HYPERPARAMS
+#define METRIC_HYPERPARAMS
 
 #define WSP // comment for mrsp
 
