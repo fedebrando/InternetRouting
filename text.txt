@@ -7,7 +7,3 @@ Dataset: http://www.topology-zoo.org/dataset.html (suggerimento: concentrarsi su
 Riferimenti bibliografici:
 [1] Dynerowicz S., Griffin T. G., On the Forwarding Paths Produced by Internet Routing Algorithms. Seweryn Dynerowicz (University of Namur, Belgium), Timothy G. Griffin. ICNP 2013.
 [2] Griffin T. J., Lecture Notes, Algebraic Path Problems with applications to Internet Routing, Computer Laboratory, University of Cambridge, 2013.
-
-// TODO el mundo
-1. (find_qk_min leggermente meglio, facoltativo)
-7. Scrivere un README.md da cristiani
