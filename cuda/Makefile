@@ -61,7 +61,7 @@ $(OBJ)/utilities.o: $(UTILITIES)/utilities.cu $(UTILITIES)/utilities.cuh
 $(OBJ)/reading_data.o: $(R_DATA)/reading_data.cu $(R_DATA)/reading_data.cuh $(METRICS)/lex_product.cuh $(METRICS)/metric_hyperparams.h $(METRICS)/wsp_or_mrsp.cuh $(UTILITIES)/utilities.cuh $(R_DATA)/node.cuh 
 	$(CC) $(ARCH) $(OTHER) -dc $< -o $@
 
-$(OBJ)/node.o: $(R_DATA)/node.cu $(R_DATA)/node.cuh
+$(OBJ)/node.o: $(R_DATA)/node.cu $(R_DATA)/node.cuh $(METRICS)/lex_product.cuh $(UTILITIES)/path.cuh $(UTILITIES)/pset.cuh
 	$(CC) $(ARCH) $(OTHER) -dc $< -o $@
 
 clean:

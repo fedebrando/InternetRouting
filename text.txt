@@ -12,4 +12,4 @@ Riferimenti bibliografici:
 1. (find_qk_min leggermente meglio, facoltativo)
 7. Scrivere un README.md da cristiani
 
-size_t c
+size_t c 

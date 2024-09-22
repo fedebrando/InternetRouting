@@ -16,6 +16,12 @@
 #include "lex_product.cuh"
 #include "wsp_or_mrsp.cuh"
 
+#define TIMING
+
+#ifdef TIMING
+#include <time.h>
+#endif
+
 __device__ node find_qk_min(const lex_product* d, const nset* v, nset** s, nset** diff, node i, unsigned int n);
 __global__ void dijkstra(boolean* err, const lex_product* a, lex_product* d, pset** pi, const path* eps, unsigned int n, const nset* v, nset** s, nset** diff, path*** paths_app);
 __host__ nset* v_host_to_device(unsigned int n);

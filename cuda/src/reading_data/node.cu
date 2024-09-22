@@ -27,3 +27,51 @@ __host__ double haversine(const Node* n1, const Node* n2)
     c = 2 * atan2(sqrt(a), sqrt(1 - a));
     return R * c;
 }
+
+void print_results(const lex_product* d, pset** pi, const Node* v_info, unsigned int n)
+{
+    for (node i = 0; i < n; i++)
+    {
+        for (node j = 0; j < n; j++)
+        {
+            Node_print(v_info + i);
+            printf(" -> ");
+            Node_print(v_info + j);
+            printf(" (");
+            lex_product_print(d[idx(i, j, n)]);
+            printf("): ");
+            pset_v_info_print(pi[idx(i, j, n)], v_info);
+            printf("\n");
+        }
+    }
+}
+
+void pset_v_info_print(const pset* s, const Node* v_info)
+{
+    printf("{");
+    for (node i = 0; i < s->size; i++)
+    {
+        path_v_info_print(s->paths[i], v_info);
+        if (i != s->size - 1)
+            printf(", ");
+    }
+    printf("}");
+}
+
+void path_v_info_print(const path* p, const Node* v_info)
+{
+    if (p->size)
+    {
+        printf("(");
+        for (node i = 0; i < p->size; i++)
+        {
+            Node_print(v_info + p->nodes[i]);
+            if (i == p->size - 1)
+                printf(")");
+            else
+                printf(", ");
+        }
+    }
+    else
+        printf("ε");
+}

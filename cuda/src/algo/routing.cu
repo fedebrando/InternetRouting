@@ -256,6 +256,10 @@ __host__ __device__ void pi_print(unsigned int n, pset** pi)
 
 __host__ void compute_routing(unsigned int n, const lex_product* a, lex_product** d, pset*** pi)
 {
+#ifdef TIMING
+    struct timespec start, end;
+    double ms;
+#endif
     nset* v_dev;
     lex_product *a_dev, *d_dev;
     nset **s_dev, **diff_dev;
@@ -276,8 +280,16 @@ __host__ void compute_routing(unsigned int n, const lex_product* a, lex_product*
     eps_dev = path_host_to_device(eps); // eps_dev
     paths_app_dev = multi_paths_app_host_to_device(n);
 
+#ifdef TIMING
+    clock_gettime(CLOCK_MONOTONIC, &start);
+#endif
     // Parallel Computing
     dijkstra<<<1, n>>>(err_dev, a_dev, d_dev, pi_dev, eps_dev, n, v_dev, s_dev, diff_dev, paths_app_dev);
+#ifdef TIMING
+    clock_gettime(CLOCK_MONOTONIC, &end);
+    ms = (end.tv_sec - start.tv_sec) * 1000.0 + (end.tv_nsec - start.tv_nsec) / 1000000.0;
+    printf("Elapsed time: %lf ms\n\n", ms);
+#endif
     
     // Device -> Host (Check Error)
     err = (boolean*) malloc(n * sizeof(boolean));

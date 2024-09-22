@@ -13,23 +13,13 @@
 #include "node.cuh"
 #include "reading_data.cuh"
 
-#define TIMING
-
-#ifdef TIMING
-#include <time.h>
-#endif
-
 int main(void)
 {
-#ifdef TIMING
-    struct timespec start, end;
-    double ms;
-#endif
     unsigned int n;
     Node* v_info;
-    lex_product *a;
-    lex_product *d;
-    pset **pi;
+    lex_product* a;
+    lex_product* d;
+    pset** pi;
 
     // Reading file (Initialization)
     n = get_num_nodes("data/node.dat");
@@ -53,23 +43,19 @@ int main(void)
         exit(1);
     }
 
-#ifdef TIMING
-    clock_gettime(CLOCK_MONOTONIC, &start);
-#endif
     // Parallel Routing Algorithm
     compute_routing(n, a, &d, &pi);
-#ifdef TIMING
-    clock_gettime(CLOCK_MONOTONIC, &end);
-    ms = (end.tv_sec - start.tv_sec) * 1000.0 + (end.tv_nsec - start.tv_nsec) / 1000000.0;
-    printf("Elapsed time: %lf ms\n\n", ms);
-#endif
     
+    /*
     // Results printing
     printf("--- D MATRIX ---\n");
     d_print(n, d);
 
     printf("\n--- PI MATRIX ---\n");
     pi_print(n, pi);
+    */
+
+    print_results(d, pi, v_info, n);
 
     // Free
     free(v_info);
