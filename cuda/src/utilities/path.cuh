@@ -12,12 +12,12 @@
 
 typedef struct
 {
-    unsigned int n_nodes;
-    unsigned int size;
+    size_t n_nodes;
+    size_t size;
     node* nodes;
 } path;
 
-__host__ __device__ path* path_create(unsigned int n_nodes);
+__host__ __device__ path* path_create(size_t n_nodes);
 __host__ void path_free(path* p);
 __host__ __device__ boolean path_in(const path* p, node n);
 __host__ __device__ boolean path_add(path* p, node i, node j);

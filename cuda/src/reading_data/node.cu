@@ -28,7 +28,7 @@ __host__ double haversine(const Node* n1, const Node* n2)
     return R * c;
 }
 
-void print_results(const lex_product* d, pset** pi, const Node* v_info, unsigned int n)
+void print_results(const lex_product* d, pset** pi, const Node* v_info, size_t n)
 {
     for (node i = 0; i < n; i++)
     {

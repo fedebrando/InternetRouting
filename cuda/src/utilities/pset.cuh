@@ -16,13 +16,13 @@
 
 typedef struct
 {
-    unsigned int n_nodes;
-    unsigned int size;
-    unsigned int m_size;
+    size_t n_nodes;
+    size_t size;
+    size_t m_size;
     path** paths;
 } pset;
 
-__host__ pset* pset_create(unsigned int n_nodes);
+__host__ pset* pset_create(size_t n_nodes);
 __host__ void pset_free(pset* s);
 __host__ __device__ void pset_clear(pset* s);
 __host__ __device__ boolean pset_in(const pset* s, const path* p);

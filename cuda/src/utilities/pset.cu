@@ -1,7 +1,7 @@
 
 #include "pset.cuh"
 
-__host__ pset* pset_create(unsigned int n_nodes)
+__host__ pset* pset_create(size_t n_nodes)
 {
     pset* s = (pset*) malloc(sizeof(pset));
 
@@ -9,14 +9,14 @@ __host__ pset* pset_create(unsigned int n_nodes)
     s->size = 0;
     s->m_size = PROB_MAX_OPT_PATHS;
     s->paths = (path**) malloc(s->m_size * sizeof(path*));
-    for (unsigned int i = 0; i < s->m_size; i++)
+    for (size_t i = 0; i < s->m_size; i++)
         s->paths[i] = path_create(n_nodes);
     return s;
 }
 
 __host__ void pset_free(pset* s)
 {
-    for (unsigned int i = 0; i < s->m_size; i++)
+    for (size_t i = 0; i < s->m_size; i++)
         path_free(s->paths[i]);
     free(s->paths);
     free(s);
@@ -86,7 +86,7 @@ __host__ pset* pset_host_to_device(const pset* s)
     path** paths_dev;
     path** paths_ptr_dev = (path**) malloc(s->m_size * sizeof(path*));
 
-    for (unsigned int i = 0; i < s->m_size; i++)
+    for (size_t i = 0; i < s->m_size; i++)
         paths_ptr_dev[i] = path_host_to_device(s->paths[i]);
 
     cudaMalloc(&paths_dev, s->m_size * sizeof(path*));
@@ -118,7 +118,7 @@ __host__ pset* pset_device_to_host(pset* s_dev)
     cudaFree(s->paths);
 
     paths = (path**) malloc(s->m_size * sizeof(path*));
-    for (unsigned int i = 0; i < s->m_size; i++)
+    for (size_t i = 0; i < s->m_size; i++)
         paths[i] = path_device_to_host(paths_ptr_dev[i]);
     free(paths_ptr_dev);
 

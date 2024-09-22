@@ -15,7 +15,7 @@
 
 int main(void)
 {
-    unsigned int n;
+    size_t n;
     Node* v_info;
     lex_product* a;
     lex_product* d;
@@ -61,7 +61,7 @@ int main(void)
     free(v_info);
     free(a);
     free(d);
-    for (unsigned int i = 0; i < n*n; i++)
+    for (size_t i = 0; i < n*n; i++)
         pset_free(pi[i]);
     free(pi);
         

@@ -1,10 +1,10 @@
 
 #include "reading_data.cuh"
 
-__host__ unsigned int get_num_nodes(const char* filename)
+__host__ size_t get_num_nodes(const char* filename)
 {
     FILE* file = fopen(filename, "r");
-    unsigned int n_nodes = 0;
+    size_t n_nodes = 0;
     char line[MAX_LINE_LENGTH];
 
     if (file) 
@@ -58,13 +58,13 @@ __host__ boolean getV(const char* filename, Node* v)
     return 1;
 }
 
-__host__ boolean getA(const char* filename, const Node* v, lex_product* a, unsigned int n)
+__host__ boolean getA(const char* filename, const Node* v, lex_product* a, size_t n)
 {
     FILE *file = fopen(filename, "r");
     int n_values;
     char** values;
     char line[MAX_LINE_LENGTH];
-    unsigned int first, second;
+    size_t first, second;
     double distance;
 #ifdef WSP
     double bandwidth;
@@ -74,7 +74,7 @@ __host__ boolean getA(const char* filename, const Node* v, lex_product* a, unsig
 
     if (!file) 
         return 0;
-    for (unsigned int i = 0; i < n*n; i++)
+    for (size_t i = 0; i < n*n; i++)
         a[i] = ZERO;
     fgets(line, sizeof(line), file);
     n_values = get_num_values(line);

@@ -1,7 +1,7 @@
 
 #include "nset.cuh"
 
-__host__ __device__ unsigned int n_bytes(unsigned int n_nodes)
+__host__ __device__ size_t n_bytes(size_t n_nodes)
 {
     return n_nodes / (8*sizeof(char)) + (n_nodes % (8*sizeof(char)) ? sizeof(char) : 0);
 }
@@ -11,7 +11,7 @@ __host__ __device__ void nset_clear(nset* s)
     memset(s->flags, 0, n_bytes(s->n_nodes) * sizeof(char));
 }
 
-__host__ nset* nset_create(unsigned int n_nodes)
+__host__ nset* nset_create(size_t n_nodes)
 {
     nset* s = (nset*) malloc(sizeof(nset));
     
@@ -34,16 +34,16 @@ __host__ __device__ void nset_print(const nset* s)
         if (nset_in(s, n))
         {
             if (n == s->n_nodes - 1)
-                printf("%d", n);
+                printf("%zu", n);
             else
-                printf("%d, ", n);
+                printf("%zu, ", n);
         }
     printf("}");
 }
 
 __host__ __device__ void nset_insert(nset* s, node n)
 {
-    s->flags[n/8] = (unsigned int)s->flags[n/8] | (unsigned int)pow(2, n % 8);
+    s->flags[n/8] = (size_t)s->flags[n/8] | (size_t)pow(2, n % 8);
 }
 
 __host__ __device__ void nset_difference(nset* res, const nset* s1, const nset* s2)
@@ -64,7 +64,7 @@ __host__ nset* nset_host_to_device(const nset* s)
 {
     char* flags_dev;
     nset* s_dev;
-    unsigned int flags_size = n_bytes(s->n_nodes);
+    size_t flags_size = n_bytes(s->n_nodes);
     nset s_app;
 
     cudaMalloc(&flags_dev, flags_size * sizeof(char));
@@ -82,7 +82,7 @@ __host__ nset* nset_device_to_host(nset* s_dev)
 {
     nset* s = (nset*) malloc(sizeof(nset));
     char* flags;
-    unsigned int flags_size;
+    size_t flags_size;
 
     cudaMemcpy(s, s_dev, sizeof(nset), cudaMemcpyDeviceToHost);
     cudaFree(s_dev);

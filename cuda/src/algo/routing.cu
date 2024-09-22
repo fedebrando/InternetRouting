@@ -1,7 +1,7 @@
 
 #include "routing.cuh"
 
-__device__ node find_qk_min(const lex_product* d, const nset* v, nset** s, nset** diff, node i, unsigned int n)
+__device__ node find_qk_min(const lex_product* d, const nset* v, nset** s, nset** diff, node i, size_t n)
 {
     node qk;
     lex_product qk_min = ZERO;
@@ -21,7 +21,7 @@ __device__ node find_qk_min(const lex_product* d, const nset* v, nset** s, nset*
     return qk;
 }
 
-__global__ void dijkstra(boolean* err, const lex_product* a, lex_product* d, pset** pi, const path* eps, unsigned int n, const nset* v, nset** s, nset** diff, path*** paths_app)
+__global__ void dijkstra(boolean* err, const lex_product* a, lex_product* d, pset** pi, const path* eps, size_t n, const nset* v, nset** s, nset** diff, path*** paths_app)
 {
     node i = threadIdx.x;
     node qk;
@@ -54,7 +54,7 @@ __global__ void dijkstra(boolean* err, const lex_product* a, lex_product* d, pse
     }
 }
 
-__host__ nset* v_host_to_device(unsigned int n)
+__host__ nset* v_host_to_device(size_t n)
 {
     nset *v, *v_dev;
 
@@ -67,7 +67,7 @@ __host__ nset* v_host_to_device(unsigned int n)
     return v_dev;
 }
 
-__host__ nset** s_host_to_device(unsigned int n)
+__host__ nset** s_host_to_device(size_t n)
 {
     nset *s, **s_dev_ptr, **s_dev;
 
@@ -82,7 +82,7 @@ __host__ nset** s_host_to_device(unsigned int n)
     return s_dev;
 }
 
-__host__ void s_free_device(unsigned int n, nset** s_dev)
+__host__ void s_free_device(size_t n, nset** s_dev)
 {
     nset** s_dev_ptr = (nset**) malloc(n * sizeof(nset*));
 
@@ -93,7 +93,7 @@ __host__ void s_free_device(unsigned int n, nset** s_dev)
     free(s_dev_ptr);
 }
 
-__host__ nset** diff_host_to_device(unsigned int n)
+__host__ nset** diff_host_to_device(size_t n)
 {
     nset *diff, **diff_dev_ptr, **diff_dev;
 
@@ -108,7 +108,7 @@ __host__ nset** diff_host_to_device(unsigned int n)
     return diff_dev;
 }
 
-__host__ void diff_free_device(unsigned int n, nset** diff_dev)
+__host__ void diff_free_device(size_t n, nset** diff_dev)
 {
     nset** diff_dev_ptr = (nset**) malloc(n * sizeof(nset*));
 
@@ -119,35 +119,35 @@ __host__ void diff_free_device(unsigned int n, nset** diff_dev)
     free(diff_dev_ptr);
 }
 
-__host__ pset** pi_host_to_device(unsigned int n)
+__host__ pset** pi_host_to_device(size_t n)
 {
     pset **pi, **pi_dev_ptr, **pi_dev;
 
     pi = (pset**) malloc(n*n * sizeof(pset*));
-    for (unsigned int i = 0; i < n*n; i++)
+    for (size_t i = 0; i < n*n; i++)
         pi[i] = pset_create(n);
     pi_dev_ptr = (pset**) malloc(n*n * sizeof(pset*));
-    for (unsigned int i = 0; i < n*n; i++)
+    for (size_t i = 0; i < n*n; i++)
         pi_dev_ptr[i] = pset_host_to_device(pi[i]);
     cudaMalloc(&pi_dev, n*n * sizeof(pset*));
     cudaMemcpy(pi_dev, pi_dev_ptr, n*n * sizeof(pset*), cudaMemcpyHostToDevice);
 
     free(pi_dev_ptr);
-    for (unsigned int i = 0; i < n*n; i++)
+    for (size_t i = 0; i < n*n; i++)
         pset_free(pi[i]);
     free(pi);
 
     return pi_dev;
 }
 
-__host__ pset** pi_device_to_host(unsigned int n, pset** pi_dev)
+__host__ pset** pi_device_to_host(size_t n, pset** pi_dev)
 {
     pset **pi_dev_ptr, **pi_res;
 
     pi_res = (pset**) malloc(n*n * sizeof(pset*));
     pi_dev_ptr = (pset**) malloc(n*n * sizeof(pset*));
     cudaMemcpy(pi_dev_ptr, pi_dev, n*n * sizeof(path*), cudaMemcpyDeviceToHost);
-    for (unsigned int i = 0; i < n*n; i++)
+    for (size_t i = 0; i < n*n; i++)
         pi_res[i] = pset_device_to_host(pi_dev_ptr[i]);
 
     free(pi_dev_ptr);
@@ -155,7 +155,7 @@ __host__ pset** pi_device_to_host(unsigned int n, pset** pi_dev)
     return pi_res;
 }
 
-__host__ path** paths_app_host_to_device(unsigned int n)
+__host__ path** paths_app_host_to_device(size_t n)
 {
     path* p = path_create(n);
     path** paths_app_dev_ptr = (path**) malloc(n * sizeof(path*));
@@ -172,7 +172,7 @@ __host__ path** paths_app_host_to_device(unsigned int n)
     return paths_app_dev;
 }
 
-__host__ void paths_app_free_device(unsigned int n, path** paths_app_dev)
+__host__ void paths_app_free_device(size_t n, path** paths_app_dev)
 {
     path** paths_app_dev_ptr = (path**) malloc(n * sizeof(path*));
 
@@ -184,7 +184,7 @@ __host__ void paths_app_free_device(unsigned int n, path** paths_app_dev)
     free(paths_app_dev_ptr);
 }
 
-__host__ path*** multi_paths_app_host_to_device(unsigned int n)
+__host__ path*** multi_paths_app_host_to_device(size_t n)
 {
     path*** mpa_dev;
     path*** mpa_dev_ptr = (path***) malloc(n * sizeof(path**));
@@ -199,7 +199,7 @@ __host__ path*** multi_paths_app_host_to_device(unsigned int n)
     return mpa_dev;
 }
 
-__host__ void multi_paths_app_free_device(unsigned int n, path*** mpa_dev)
+__host__ void multi_paths_app_free_device(size_t n, path*** mpa_dev)
 {
     path*** mpa_dev_ptr = (path***) (malloc(n * sizeof(path**)));
 
@@ -211,7 +211,7 @@ __host__ void multi_paths_app_free_device(unsigned int n, path*** mpa_dev)
     free(mpa_dev_ptr);
 }
 
-__host__ boolean* err_host_to_device(unsigned int n)
+__host__ boolean* err_host_to_device(size_t n)
 {
     boolean* err_dev;
 
@@ -220,7 +220,7 @@ __host__ boolean* err_host_to_device(unsigned int n)
     return err_dev;
 }
 
-__host__ boolean check_error(unsigned int n, const boolean* err)
+__host__ boolean check_error(size_t n, const boolean* err)
 {
     for (node i = 0; i < n; i++)
         if (err[i])
@@ -228,7 +228,7 @@ __host__ boolean check_error(unsigned int n, const boolean* err)
     return 0;
 }
 
-__host__ __device__ void d_print(unsigned int n, const lex_product* d)
+__host__ __device__ void d_print(size_t n, const lex_product* d)
 {
     for (node i = 0; i < n; i++)
     {
@@ -241,7 +241,7 @@ __host__ __device__ void d_print(unsigned int n, const lex_product* d)
     }
 }
 
-__host__ __device__ void pi_print(unsigned int n, pset** pi)
+__host__ __device__ void pi_print(size_t n, pset** pi)
 {
     for (node i = 0; i < n; i++)
     {
@@ -254,7 +254,7 @@ __host__ __device__ void pi_print(unsigned int n, pset** pi)
     }
 }
 
-__host__ void compute_routing(unsigned int n, const lex_product* a, lex_product** d, pset*** pi)
+__host__ void compute_routing(size_t n, const lex_product* a, lex_product** d, pset*** pi)
 {
 #ifdef TIMING
     struct timespec start, end;

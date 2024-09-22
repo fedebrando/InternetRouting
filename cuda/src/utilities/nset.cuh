@@ -13,13 +13,13 @@
 
 typedef struct
 {
-    unsigned int n_nodes;
+    size_t n_nodes;
     char* flags;
 } nset;
 
-__host__ __device__ unsigned int n_bytes(unsigned int n_nodes);
+__host__ __device__ size_t n_bytes(size_t n_nodes);
 __host__ __device__ void nset_clear(nset* s);
-__host__ nset* nset_create(unsigned int n_nodes);
+__host__ nset* nset_create(size_t n_nodes);
 __host__ __device__ boolean nset_in(const nset* s, node n);
 __host__ __device__ void nset_print(const nset* s);
 __host__ __device__ void nset_insert(nset* s, node n);

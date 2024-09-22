@@ -1,7 +1,7 @@
 
 #include "path.cuh"
 
-__host__ __device__ path* path_create(unsigned int n_nodes)
+__host__ __device__ path* path_create(size_t n_nodes)
 {
     path* p = (path*) malloc(sizeof(path));
 
@@ -63,9 +63,9 @@ __host__ __device__ void path_print(const path* p)
         for (node i = 0; i < p->size; i++)
         {
             if (i == p->size - 1)
-                printf("%d)", p->nodes[i]);
+                printf("%zu)", p->nodes[i]);
             else
-                printf("%d, ", p->nodes[i]);
+                printf("%zu, ", p->nodes[i]);
         }
     }
     else
