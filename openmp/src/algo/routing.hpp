@@ -63,7 +63,7 @@ class Routing
                 s.insert(qk);
                 for (node j : v - s)
                 {
-                    if (d[i][qk] * a[qk][j] == d[i][j])
+                    if (d[i][qk] * a[qk][j] == d[i][j] && d[i][j] != E::zero())
                         pi[i][j] += pi[i][qk] ^ set<Path<node>>{Path(Edge(qk, j))};
                     else if (d[i][qk] * a[qk][j] < d[i][j])
                     {

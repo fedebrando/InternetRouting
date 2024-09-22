@@ -5,6 +5,6 @@
 //#define SEQ
 #define PAR_OMP
 
-#define VERBOSE
+//#define VERBOSE
 
 #endif

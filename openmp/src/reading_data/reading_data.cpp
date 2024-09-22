@@ -34,7 +34,7 @@ vector<Node> getV(string filename)
     return v;
 }
 
-#ifdef SHORTEST_WIDEST
+#ifdef WSP
 void getA(string filename, const vector<Node>& v, vector<vector<LexProduct<Distance, Bandwidth>>>& a)
 {
     ifstream inputFile;  

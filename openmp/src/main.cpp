@@ -7,6 +7,7 @@
 #include "utilities.hpp"
 #include "node.hpp"
 #include "reading_data.hpp"
+#include "metric_hyperparams.h"
 
 #define TIMING
 
@@ -23,7 +24,7 @@ int main(void)
     chrono::milliseconds durata_ms;
 #endif
     vector<Node> v = getV("../../data/node.dat");
-#ifdef SHORTEST_WIDEST
+#ifdef WSP
     vector<vector<LexProduct<Distance, Bandwidth>>> a(v.size(), vector<LexProduct<Distance, Bandwidth>>(v.size()));
 #else
     vector<vector<LexProduct<Distance, Reliability>>> a(v.size(), vector<LexProduct<Distance, Reliability>>(v.size()));
@@ -31,7 +32,7 @@ int main(void)
 
     getA("../../data/edge.dat", v, a);
 
-#ifdef SHORTEST_WIDEST
+#ifdef WSP
     Routing<LexProduct<Distance, Bandwidth>, Node> r(v, a);
 #else
     Routing<LexProduct<Distance, Reliability>, Node> r(v, a);
