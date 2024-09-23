@@ -18,7 +18,7 @@ From the `openmp/build/bin` folder, launch the execution of the main program, re
 ```
 The choice of metrics for execution is made in the file `openmp/src/metrics/metric_hyperparams.h`.
 ## Parallel with CUDA
-In reference to the University of Parma cluster, the commands for proper execution are given below.\
+In reference to the [University of Parma](https://www.unipr.it) cluster, the commands for proper execution are given below.\
 Import at least version `6.3.0` of the `gcc` compiler.
 ```bash
 module load gcc/6.3.0
