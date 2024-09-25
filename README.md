@@ -2,7 +2,7 @@
 There are three versions of the Routing Algorithm:
 * sequential (`openmp` folder, requires definition of only the `SEQ` macroconstant in `openmp/src/algo/settings.h`)
 * parallel with OpenMP (folder `openmp`, requires definition of only the macroconstant `PAR_OMP` in `openmp/src/algo/settings.h`)
-* Parallel with CUDA (`cuda` folder).
+* parallel with CUDA (`cuda` folder).
 ## Sequential and Parallel with OpenMP
 Check if you have at least version `10.5.0` of the `gcc` compiler.
 ```bash
