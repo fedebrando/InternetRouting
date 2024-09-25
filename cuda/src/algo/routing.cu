@@ -286,6 +286,7 @@ __host__ void compute_routing(size_t n, const lex_product* a, lex_product** d, p
     // Parallel Computing
     dijkstra<<<1, n>>>(err_dev, a_dev, d_dev, pi_dev, eps_dev, n, v_dev, s_dev, diff_dev, paths_app_dev);
 #ifdef TIMING
+    cudaDeviceSynchronize();
     clock_gettime(CLOCK_MONOTONIC, &end);
     ms = (end.tv_sec - start.tv_sec) * 1000.0 + (end.tv_nsec - start.tv_nsec) / 1000000.0;
     printf("Elapsed time: %lf ms\n\n", ms);
