@@ -9,7 +9,6 @@
 #SBATCH --job-name="IR-CUDA"
 #SBATCH --output=%x.o%j
 #< Charge resources to account
-#SBATCH --account=<insert your account>
 module load cuda
 cd "$SLURM_SUBMIT_DIR"
 build/bin/main
