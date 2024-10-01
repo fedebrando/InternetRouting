@@ -8,10 +8,8 @@
 #SBATCH --mem=4G
 #SBATCH --job-name="IR-CUDA"
 #SBATCH --output=%x.o%j
-## Reservation
-##SBATCH --reservation=t_2023_hpc_lmi-20240419
 #< Charge resources to account
-#SBATCH --account=t_2023_hpc_lmi
+#SBATCH --account=<insert your account>
 module load cuda
 cd "$SLURM_SUBMIT_DIR"
 build/bin/main
